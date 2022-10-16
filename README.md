@@ -8,6 +8,12 @@ git clone https://github.com/GrishaTS/Django_Base.git
 cd Django_Base
 ```
 ```commandline
+python -m venv venv
+```
+```commandline
+.\venv\Scripts\activate
+```
+```commandline
 pip install -r requirements.txt
 ```
 ```commandline
