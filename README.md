@@ -5,7 +5,7 @@
 git clone https://github.com/GrishaTS/Django_Base.git
 ```
 ```commandline
-cd Django_questionnaire
+cd Django_Base
 ```
 ```commandline
 pip install -r requirements.txt
