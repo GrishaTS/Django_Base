@@ -1,4 +1,18 @@
-# Yandex Intensive Home work
+# Yandex Intensive Homework
 ## ![flake8 test]( https://github.com/GrishaTS/Django_Base/actions/workflows/python-package.yml/badge.svg)
-
-
+### Для запуска проекта пропишите:
+```commandline
+git clone https://github.com/GrishaTS/Django_questionnaire.git
+```
+```commandline
+cd Django_questionnaire
+```
+```commandline
+pip install -r requirements.txt
+```
+```commandline
+cd mysite
+```
+```commandline
+python manage.py runserver
+```
