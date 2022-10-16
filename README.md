@@ -11,7 +11,7 @@ cd Django_Base
 pip install -r requirements.txt
 ```
 ```commandline
-cd mysite
+cd lyceum
 ```
 ```commandline
 python manage.py runserver
