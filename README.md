@@ -24,6 +24,6 @@ cd lyceum
 ```
 
 ### Запускаем сайт
-```commandline 
-python manage.py runserver
-```
+| Windows | MacOs + Linux                            |
+| :--------------- | :------------------------------ |
+|`python manage.py runserver`|`python3 manage.py runserver`|
