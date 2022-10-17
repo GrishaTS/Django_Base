@@ -29,7 +29,7 @@ cd lyceum
 |`python manage.py runserver`|`python3 manage.py runserver`|
 
 
-#### Доп задание:
+## Доп задание:
 | Windows | MacOs + Linux                            |Обозначение|
 | :--------------- | :------------------------------ |:--------------- |
 |`pip install python-dotenv`|`pip3 install python-dotenv`|Добавляем библиотеку|
