@@ -9,14 +9,20 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw49#e6c#9+)'
-
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = eval(os.getenv('DEBUG'))
+# SECRET_KEY = 'django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw4
+# 9#e6c#9+)'
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
