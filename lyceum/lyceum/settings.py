@@ -23,6 +23,7 @@ DEBUG = eval(os.getenv('DEBUG'))
 # SECRET_KEY = 'django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw4
 # 9#e6c#9+)'
 # DEBUG = True
+#  на всякий случай заккоментил, понятное дело в финал коде такого не будет
 
 ALLOWED_HOSTS = []
 
