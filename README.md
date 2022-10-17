@@ -40,7 +40,7 @@ SECRET_KEY=django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw49#e6c#9+)
 DEBUG=True
 ```
 
-### Чтобы забрать нужные данные: 
+### Чтобы забрать переменные из файла .env: 
 #### 1) Импортируем os и dotenv.load_dotenv
 ```commandline 
 import os
