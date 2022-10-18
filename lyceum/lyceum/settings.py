@@ -22,11 +22,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = (os.getenv('DEBUG', 'True') == 'True')
 
-# SECRET_KEY = 'django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw4
-# 9#e6c#9+)'
-# DEBUG = True
-#  на всякий случай закомментил, понятное дело в финал коде такого не будет
-
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
