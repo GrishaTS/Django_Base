@@ -29,33 +29,10 @@ cd lyceum
 |`python manage.py runserver`|`python3 manage.py runserver`|
 
 
-## Доп задание:
-### Устанавливаем библиотеку для переменных окружения
-| Windows | MacOs + Linux                            |Обозначение|
-| :--------------- | :------------------------------ |:--------------- |
-|`pip install python-dotenv`|`pip3 install python-dotenv`|Добавляем библиотеку|
-### Создаем файл .env, прописываем туда все секретные данные (пример - .env_example):
-```commandline 
+## Настройка .env:
+##### Примечание: это необязательно, проект будет запускаться и без этого
+### Создаем файл .env в корневой директории, прописываем туда секретные данные (пример - .env_example):
+```commandline
 SECRET_KEY=???
 DEBUG=???
 ```
-##### В файле .env_example находятся данные для примера и понимания структуры .env файла
-
-### Чтобы забрать переменные из файла .env: 
-#### 1) Импортируем os и dotenv.load_dotenv
-```commandline 
-import os
-from dotenv import load_dotenv
-```
-
-#### 2) Забираем переменные окружения и присваиваем переменным в коде
-```commandline 
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY', 'DEFAULT_SECRET_KEY')
-```
-
-#### 3) Используем оператор сравнения для определения DEBAG, так как все переменные окружения хранятся в строках, а переменная DEBAG имеет булевое значение
-```commandline 
-DEBUG = (os.getenv('DEBUG', 'True') == 'True')
-```
-
