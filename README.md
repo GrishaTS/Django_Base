@@ -36,8 +36,8 @@ cd lyceum
 |`pip install python-dotenv`|`pip3 install python-dotenv`|Добавляем библиотеку|
 ### Создаем файл .env, прописываем туда все секретные данные: 
 ```commandline 
-SECRET_KEY=django-insecure-#ob)5wygi#bi1z&qs=z1cacv-mjh%fs+di)i+2tw49#e6c#9+)
-DEBUG=True
+SECRET_KEY=???
+DEBUG=???
 ```
 
 ### Чтобы забрать переменные из файла .env: 
