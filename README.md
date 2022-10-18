@@ -55,6 +55,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 #### 3) Используем оператор сравнения для определения DEBAG, так как все переменные окружения хранятся в строках, а переменная DEBAG имеет булевое значение
 ```commandline 
-DEBUG = (os.getenv('DEBUG', 'False') == 'True')
+DEBUG = (os.getenv('DEBUG', 'True') == 'True')
 ```
 
