@@ -1,6 +1,6 @@
 # Django Homework
 ![flake8 test]( https://github.com/GrishaTS/Django_Base/actions/workflows/python-package.yml/badge.svg) 
-![workflow badge](https://github.com/GrishaTS/Django_Base/actions/workflows/django.yml/badge.svg)
+![workflow badge]( https://github.com/GrishaTS/Django_Base/actions/workflows/django.yml/badge.svg)
 
 ## Клонируем репозиторий
 ```commandline 
