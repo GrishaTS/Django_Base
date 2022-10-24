@@ -91,7 +91,7 @@ class StaticURLTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_catalog_float_special_symbol_endpoint(self):
-        response = Client().get('/catalog/2.34eaws/')
+        response = Client().get('/catalog/2.34:/')
         self.assertEqual(response.status_code, 404)
 
     def test_catalog_math_operation_endpoint(self):
