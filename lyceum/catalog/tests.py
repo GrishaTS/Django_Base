@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 
@@ -5,105 +7,43 @@ from .models import Category, Item, Tag
 
 
 class StaticURLTests(TestCase):
-    def test_catalog_endpoint(self):
-        response = Client().get('/catalog/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_catalog_p_int_endpoint(self):
-        response = Client().get('/catalog/4783/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_one_endpoint(self):
-        response = Client().get('/catalog/1/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_catalog_n_int_endpoint(self):
-        response = Client().get('/catalog/-645/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_zero_endpoint(self):
-        response = Client().get('/catalog/0/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_n_zero_endpoint(self):
-        response = Client().get('/catalog/-0/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_endpoint(self):
-        response = Client().get('/catalog/fdafdj/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_int_str_endpoint(self):
-        response = Client().get('/catalog/234str/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_int_endpoint(self):
-        response = Client().get('/catalog/str248359/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_int_str_endpoint(self):
-        response = Client().get('/catalog/str248359asdf/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_int_str_int_endpoint(self):
-        response = Client().get('/catalog/248359asdf231/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_zero_int_endpoint(self):
-        response = Client().get('/catalog/0234/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_n_zero_int_endpoint(self):
-        response = Client().get('/catalog/-0234/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_5_zero_endpoint(self):
-        response = Client().get('/catalog/00000/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_n_5_zero_endpoint(self):
-        response = Client().get('/catalog/-00000/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_special_symbol_int_endpoint(self):
-        response = Client().get('/catalog/@123/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_int_special_symbol_endpoint(self):
-        response = Client().get('/catalog/123(/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_int_special_symbol_int_endpoint(self):
-        response = Client().get('/catalog/213+2345/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_n_int_str_endpoint(self):
-        response = Client().get('/catalog/-645dasd/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_zero_str_endpoint(self):
-        response = Client().get('/catalog/0asd/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_zero_endpoint(self):
-        response = Client().get('/catalog/asdf0/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_str_special_symbol_endpoint(self):
-        response = Client().get('/catalog/fdafdj_/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_float_special_symbol_endpoint(self):
-        response = Client().get('/catalog/2.34:/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_math_operation_endpoint(self):
-        response = Client().get('/catalog/12+42-345*213/')
-        self.assertEqual(response.status_code, 404)
-
-    def test_catalog_re_str_endpoint(self):
-        response = Client().get(r'/catalog/(?P<pk>^[1-9]\d*)/$/')
-        self.assertEqual(response.status_code, 404)
+    def test_item_detail_endpoint(self):
+        endpoint_status = {
+            HTTPStatus.OK: (
+                '/catalog/',
+                '/catalog/4783/',
+                '/catalog/1/'
+            ),
+            HTTPStatus.NOT_FOUND: (
+                '/catalog/-645/',
+                '/catalog/0/',
+                '/catalog/-0/',
+                '/catalog/fdafdj/',
+                '/catalog/234str/',
+                '/catalog/str248359/',
+                '/catalog/str248359asdf/',
+                '/catalog/248359asdf231/',
+                '/catalog/0234/',
+                '/catalog/-0234/',
+                '/catalog/00000/',
+                '/catalog/-00000/',
+                '/catalog/@123/',
+                '/catalog/123(/',
+                '/catalog/213+2345/',
+                '/catalog/-645dasd/',
+                '/catalog/0asd/',
+                '/catalog/asdf0/',
+                '/catalog/fdafdj_/',
+                '/catalog/2.34:/',
+                '/catalog/12+42-345*213/',
+                r'/catalog/(?P<pk>^[1-9]\d*)/$/'
+            ),
+        }
+        for status, endpoint_list in endpoint_status.items():
+            for endpoint in endpoint_list:
+                with self.subTest(endpoint=endpoint):
+                    response = Client().get(endpoint)
+                    self.assertEqual(response.status_code, status)
 
 
 class MyTests(TestCase):

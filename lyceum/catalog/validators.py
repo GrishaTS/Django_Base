@@ -2,7 +2,6 @@ from functools import wraps
 from string import punctuation
 
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 
 
 def validate_must_be_param(*must_be_in_our_item):
@@ -13,9 +12,7 @@ def validate_must_be_param(*must_be_in_our_item):
             cleaned_value = cleaned_value.replace(i, ' ')
         cleaned_value = cleaned_value.split()
         if not set(must_be_in_our_item).intersection(set(cleaned_value)):
-            raise ValidationError(
-                _('Текст не включает в себя "превосходно" или "роскошно"'),
-                params={'value': value},
-            )
+            raise ValidationError('Текст не включает в себя "превосходно" '
+                                  'или "роскошно"')
         return value
     return validator

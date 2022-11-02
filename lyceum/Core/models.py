@@ -2,10 +2,10 @@ from django.db import models
 
 
 class BaseModel(models.Model):
-    name = models.CharField(
-        "Название", help_text="Максимальная длина 150", max_length=150
+    is_published = models.BooleanField(
+        verbose_name="опубликовано",
+        default=True
     )
-    is_published = models.BooleanField("Опубликовано", default=True)
 
     class Meta:
         abstract = True
@@ -16,7 +16,7 @@ class BaseModel(models.Model):
 
 class BaseModelWithSlug(BaseModel):
     slug = models.SlugField(
-        "Слаг",
+        verbose_name="слаг",
         help_text="Максимальная длина 200",
         max_length=200
     )
