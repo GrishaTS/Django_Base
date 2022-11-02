@@ -46,7 +46,7 @@ class StaticURLTests(TestCase):
                     self.assertEqual(response.status_code, status)
 
 
-class MyTests(TestCase):
+class TestsForModels(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.Category = Category.objects.create(name='Велосипед',
