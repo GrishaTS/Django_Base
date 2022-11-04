@@ -51,7 +51,8 @@ class StaticURLTests(TestCase):
 
 class TestsForModels(TestCase):
     @classmethod
-    def setUpTestData(cls):
+    def setUpClass(cls):
+        super().setUpClass()
         cls.Category = Category.objects.create(
             name='Велосипед',
             slug='Bicycle',
