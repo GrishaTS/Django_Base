@@ -37,6 +37,15 @@ SECRET_KEY=secret_key_1234567890
 DEBUG=boolean_value
 ```
 
+## Данные тестового админа:
+
+```commandline
+Username: username_of_admin
+Password: password_of_admin
+```
+
 ## Структура базы данных
+#### В проекте находится тесовая база данных (db.sqlite), для ознакомления с ее структурой и админкой
+### Для наглядности структуры можете посмотреть ER-диаграмму:
 ![image](https://user-images.githubusercontent.com/69619529/199600012-facc6e80-5ef7-49bc-aab0-9c599320119f.png)
 
