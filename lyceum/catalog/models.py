@@ -6,14 +6,14 @@ from .validators import validate_must_be_param
 
 class Item(BaseModel):
     name = models.CharField(
-        verbose_name="название",
-        help_text="Максимальная длина 150",
-        max_length=150
+        'название',
+        help_text='Максимальная длина 150',
+        max_length=150,
     )
     text = models.TextField(
         'Текст',
         help_text='В тексте должны быть слова "превосходно" или "роскошно"',
-        validators=[validate_must_be_param('превосходно', 'роскошно')]
+        validators=[validate_must_be_param('превосходно', 'роскошно')],
     )
     category = models.ForeignKey(
         'Category',
@@ -35,10 +35,10 @@ class Item(BaseModel):
 
 class Tag(BaseModelWithSlug):
     name = models.CharField(
-        verbose_name="название",
+        'название',
         unique=True,
-        help_text="Максимальная длина 150",
-        max_length=150
+        help_text='Максимальная длина 150',
+        max_length=150,
     )
 
     class Meta:
@@ -49,18 +49,18 @@ class Tag(BaseModelWithSlug):
 
 class Category(BaseModelWithSlug):
     name = models.CharField(
-        verbose_name="название",
+        'название',
         unique=True,
-        help_text="Максимальная длина 150",
-        max_length=150
+        help_text='Максимальная длина 150',
+        max_length=150,
     )
     weight = models.SmallIntegerField(
-        verbose_name='вес',
+        'вес',
         help_text='от 0 до 32767, значение по умолчанию 100',
-        default=100
+        default=100,
     )
 
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-        ordering = ('weight', 'id')
+        ordering = 'weight', 'id'

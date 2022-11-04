@@ -3,8 +3,8 @@ from django.db import models
 
 class BaseModel(models.Model):
     is_published = models.BooleanField(
-        verbose_name="опубликовано",
-        default=True
+        'опубликовано',
+        default=True,
     )
 
     class Meta:
@@ -16,9 +16,9 @@ class BaseModel(models.Model):
 
 class BaseModelWithSlug(BaseModel):
     slug = models.SlugField(
-        verbose_name="слаг",
-        help_text="Максимальная длина 200",
-        max_length=200
+        'слаг',
+        help_text='Максимальная длина 200',
+        max_length=200,
     )
 
     class Meta:

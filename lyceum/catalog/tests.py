@@ -12,7 +12,7 @@ class StaticURLTests(TestCase):
             HTTPStatus.OK: (
                 '/catalog/',
                 '/catalog/4783/',
-                '/catalog/1/'
+                '/catalog/1/',
             ),
             HTTPStatus.NOT_FOUND: (
                 '/catalog/-645/',
@@ -36,23 +36,30 @@ class StaticURLTests(TestCase):
                 '/catalog/fdafdj_/',
                 '/catalog/2.34:/',
                 '/catalog/12+42-345*213/',
-                r'/catalog/(?P<pk>^[1-9]\d*)/$/'
+                r'/catalog/(?P<pk>^[1-9]\d*)/$/',
             ),
         }
         for status, endpoint_list in endpoint_status.items():
             for endpoint in endpoint_list:
                 with self.subTest(endpoint=endpoint):
                     response = Client().get(endpoint)
-                    self.assertEqual(response.status_code, status)
+                    self.assertEqual(
+                        response.status_code,
+                        status,
+                    )
 
 
 class TestsForModels(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.Category = Category.objects.create(name='Велосипед',
-                                               slug='Bicycle')
-        cls.Tag = Tag.objects.create(name="До 20000 руб",
-                                     slug="less-than-20000")
+        cls.Category = Category.objects.create(
+            name='Велосипед',
+            slug='Bicycle',
+        )
+        cls.Tag = Tag.objects.create(
+            name='До 20000 руб',
+            slug='less-than-20000',
+        )
 
     def test_invalid(self):
         item_count = Item.objects.count()
@@ -61,17 +68,21 @@ class TestsForModels(TestCase):
                   'превосходное чувство',
                   'нероскошное слово',
                   'Превосходное платье',
-                  'нероск.ош!но']:
+                  'нероск.ош!но',
+                  ]:
             with self.assertRaises(ValidationError):
                 self.item = Item(
                     name='Товар-велосипед',
                     category=self.Category,
-                    text=i
+                    text=i,
                 )
                 self.item.full_clean()
                 self.item.save()
                 self.item.tags.add(self.Tag)
-            self.assertEqual(Item.objects.count(), item_count)
+            self.assertEqual(
+                Item.objects.count(),
+                item_count,
+            )
 
     def test_valid(self):
         item_count = Item.objects.count()
@@ -79,10 +90,19 @@ class TestsForModels(TestCase):
                             'роскошно слово',
                             'не,роскошно!',
                             'Превосходно платье',
-                            ',превосходно.'], start=1):
-            self.item = Item(name='Товар-велосипед', category=self.Category,
-                             text=i[1])
+                            ',превосходно.',
+                            ],
+                           start=1,
+                           ):
+            self.item = Item(
+                name='Товар-велосипед',
+                category=self.Category,
+                text=i[1],
+            )
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(self.Tag)
-            self.assertEqual(Item.objects.count(), item_count + i[0])
+            self.assertEqual(
+                Item.objects.count(),
+                item_count + i[0],
+            )
