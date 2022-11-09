@@ -34,6 +34,7 @@ class Item(BaseModel):
         help_text='Выберите фотографию',
         on_delete=models.CASCADE,
         primary_key=True,
+        default='',
     )
 
     class Meta:
@@ -41,15 +42,38 @@ class Item(BaseModel):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
 
-    def __str__(self):
-        return self.text[:15]
+    @property
+    def get_img(self):
+        return get_thumbnail(
+            self.preview,
+            '300x300',
+            crop='center',
+            quality=51
+        )
+
+    def image_tmb(self):
+        if self.preview:
+            print(self.get_img)
+            return mark_safe(
+                f'<img src="{self.get_img.url}"'
+            )
+        return "Нет изображения"
+
+    image_tmb.short_description = 'превью'
+    image_tmb.allow_tags = True
 
 
 class OneImage(models.Model):
     upload = models.ImageField(
         'Фото',
-        upload_to='uploads./%Y/%m',
+        upload_to='uploads/%Y/%m',
         default=''
+    )
+    name = models.CharField(
+        'название',
+        unique=True,
+        help_text='Максимальная длина 150',
+        max_length=150,
     )
 
     class Meta:
@@ -73,20 +97,26 @@ class OneImage(models.Model):
             )
         return "Нет изображения"
 
-    image_tmb.short_description = 'превью'
-    image_tmb.allow_tags = True
+    def __str__(self):
+        return self.name
 
 
 class Gallery(models.Model):
     upload = models.ImageField(
         'Галерея',
-        upload_to='uploads./%Y/%m',
+        upload_to='uploads/%Y/%m',
         default=''
+    )
+    name = models.CharField(
+        'название',
+        unique=True,
+        help_text='Максимальная длина 150',
+        max_length=150,
     )
 
     class Meta:
         default_related_name = 'gallery'
-        verbose_name = 'галерея'
+        verbose_name = 'галерею'
         verbose_name_plural = 'галерея'
 
     @property
@@ -99,22 +129,23 @@ class Gallery(models.Model):
         )
 
     def image_tmb(self):
+        print(self.upload)
         if self.upload:
             return mark_safe(
                 f'<img src="{self.get_img.url}"'
             )
-        return "Нет галереи"
-
-    image_tmb.short_description = 'превью'
-    image_tmb.allow_tags = True
+        return "Нет изображения"
 
     item = models.ForeignKey(
         Item,
-        related_name="",
-        verbose_name='галерея',
-        help_text='Выберите галерею',
-        on_delete=models.CASCADE
+        related_name='item',
+        verbose_name='Товар',
+        help_text='Выберите товар',
+        on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Tag(BaseModelWithSlug):
@@ -129,9 +160,6 @@ class Tag(BaseModelWithSlug):
         default_related_name = 'tags'
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
-
-    def __str__(self):
-        return self.text[:15]
 
 
 class Category(BaseModelWithSlug):
@@ -151,6 +179,3 @@ class Category(BaseModelWithSlug):
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
         ordering = 'weight', 'id'
-
-    def __str__(self):
-        return self.text[:15]
