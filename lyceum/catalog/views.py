@@ -1,9 +1,17 @@
-from django.http import HttpResponse
-
-
-def item_list(request):
-    return HttpResponse('Список элементов')
+from django.shortcuts import render
 
 
 def item_detail(request, pk=1):
-    return HttpResponse('Подробно элемент')
+    print(pk)
+    if pk == '1':
+        template_name = 'catalog/index_detail1.html'
+    elif pk == '2':
+        template_name = 'catalog/index_detail2.html'
+    else:
+        template_name = 'catalog/index_detail.html'
+    return render(request, template_name)
+
+
+def item_list(request):
+    template_name = 'catalog/index.html'
+    return render(request, template_name)

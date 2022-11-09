@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>О проекте:</h2>
+      <h4>Проект создан при поддержке Академии Яндекса и Paul K.</h4>
+      <p>Создатель: Безруков Григорий Александрович</p>
+      <h4>Цель проекта:</h4>
+      <p>Целью проекта служит обучение фреймворка Django</p>
+      <p></p>
+    </div>
+    <div class="col-sm-4">
+      <img
+        src="{% static 'img/cat_about.jpg' %}"
+        alt="Cat"
+        style="width: 50%"
+      >
+    </div>
+  </div>
+</div>
+<div class="container-fluid bg-grey">
+  <h2 class="text-center">Контакт</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        Для того чтобы ознакомиться с проектом подробнее, оставите заявку на
+        получение доступа.
+      </p>
+      <p><span class="glyphicon glyphicon-map-marker"></span>Россия, Москва</p>
+      <p><span class="glyphicon glyphicon-phone"></span>+7(915)125-22-26</p>
+      <p>
+        <span class="glyphicon glyphicon-envelope"></span> bezgrisa@gmail.com
+      </p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Имя"
+            type="text"
+            required
+          >
+        </div>
+      </div>
+      <div class="col-sm-6 form-group">
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Почта"
+          type="email"
+          required
+        >
+      </div>
+    </div>
+    <div class="col-sm-12 form-group">
+      <a href="https://github.com/GrishaTS/Django_Base" class="button"
+        >Go to GitHub</a
+      >
+    </div>
+  </div>
+</div>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Интересные факты
+        </button>
+      </h5>
+    </div>
+    <div
+      id="collapseOne"
+      class="collapse show"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <p>Проект создан 18 октября 2022 года</p>
+        <p>Ученик: <a href="https://github.com/GrishaTS">GrishaTS</a></p>
+        <p>Ревьюер: <a href="https://github.com/drowsycoder">drowsycoder</a></p>
+        <p>
+          В Академии Яндекса все ревьеры помешаны на кошках и котах, поэтому
+          весь проект акцентирован на этом
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link collapsed"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          В проекте используется:
+        </button>
+      </h5>
+    </div>
+    <div
+      id="collapseTwo"
+      class="collapse"
+      aria-labelledby="headingTwo"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <p>Django</p>
+        <p>Python</p>
+        <p>GitHub</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

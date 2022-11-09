@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="col-md-4">
+  <div class="card" style="width: 60rem">
+    <img src="{% static 'img/bad_cat.jpg' %}" class="card-img-top" alt="Cat">
+    <div class="card-body">
+      <h5 class="card-title">Злая Маруся</h5>
+      <p class="card-text">
+        Кошка имеет неприятный характер, любит кусаться и т.д.
+      </p>
+      <a href="{% url 'catalog:item_list' %}" class="btn mr-2"
+        ><i class="fas fa-link"></i>К товарам</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}
