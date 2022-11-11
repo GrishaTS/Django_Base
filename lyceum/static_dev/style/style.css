@@ -1,0 +1,19 @@
+.img-circle {
+    border-radius: 100%;
+}
+.bg-1 {
+    background-color: #faebd7;
+    color: #000000;
+}
+.bg-2 {
+    background-color: #474e5d;
+    color: #ffffff;
+}
+.bg-3 {
+    background-color: #fff;
+    color: #555555;
+}
+.bg-4 {
+    background-color: #808080;
+    color: #ffffff;
+}

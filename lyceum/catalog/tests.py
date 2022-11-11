@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 
-from .models import Category, Item, Tag, OneImage
+from .models import Category, Item, OneImage, Tag
 
 
 class StaticURLTests(TestCase):

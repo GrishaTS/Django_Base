@@ -1,6 +1,12 @@
+{% load static %}
+
 <header
   class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
 >
+<img
+    src="{% static 'logo/main_logo.jpg' %}"
+    alt="Cat"
+    style="width: 3%">
   {% with request.resolver_match.view_name as view_name %}
   <a
     href="/"
@@ -17,70 +23,31 @@
     </svg>
   </a>
   <ul class="nav nav-pills">
-    {% if view_name == 'homepage:home' %}
     <li class="nav-item">
       <a
         href="{% url 'homepage:home' %}"
-        class="nav-link active"
+        class="{% if view_name == 'homepage:home' %}nav-link disabled{% else %}nav-link{% endif %}"
         aria-current="page"
         >Главная</a
       >
     </li>
     <li class="nav-item">
-      <a href="{% url 'catalog:item_list' %}" class="nav-link"
+      <a
+        href="{% url 'catalog:item_list' %}"
+        class="{% if view_name == 'catalog:item_list' %}nav-link disabled{% else %}nav-link{% endif %}"
         >Список товаров</a
       >
     </li>
     <li class="nav-item">
-      <a href="{% url 'about:description' %}" class="nav-link">О проекте</a>
-    </li>
-    {% elif view_name == 'catalog:item_list' %}
-    <li class="nav-item">
-      <a href="{% url 'homepage:home' %}" class="nav-link" aria-current="page"
-        >Главная</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'catalog:item_list' %}" class="nav-link active"
-        >Список товаров</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'about:description' %}" class="nav-link">О проекте</a>
-    </li>
-    {% elif view_name == 'about:description' %}
-    <li class="nav-item">
-      <a href="{% url 'homepage:home' %}" class="nav-link" aria-current="page"
-        >Главная</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'catalog:item_list' %}" class="nav-link"
-        >Список товаров</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'about:description' %}" class="nav-link active"
+      <a
+        href="{% url 'about:description' %}"
+        class="{% if view_name == 'about:description' %}nav-link disabled{% else %}nav-link{% endif %}"
         >О проекте</a
       >
     </li>
-    {% else %}
-    <li class="nav-item">
-      <a href="{% url 'homepage:home' %}" class="nav-link" aria-current="page"
-        >Главная</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'catalog:item_list' %}" class="nav-link"
-        >Список товаров</a
-      >
-    </li>
-    <li class="nav-item">
-      <a href="{% url 'about:description' %}" class="nav-link">О проекте</a>
-    </li>
-    {% endif %}
   </ul>
-  {% endwith %} {% comment %}
+  {% endwith %} 
+  {% comment %}
   <div class="col-md-3 text-end">
     Оставил на случай, если мы будем делать систему аккаунтов
     <button type="button" class="btn btn-outline-primary me-2">Войти</button>

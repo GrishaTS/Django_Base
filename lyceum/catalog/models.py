@@ -1,7 +1,5 @@
-from core.models import BaseModel, BaseModelWithSlug
+from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 from django.db import models
-from django.utils.safestring import mark_safe
-from sorl.thumbnail import get_thumbnail
 
 from .validators import validate_must_be_param
 
@@ -9,6 +7,7 @@ from .validators import validate_must_be_param
 class Item(BaseModel):
     name = models.CharField(
         'название',
+        unique=True,
         help_text='Максимальная длина 150',
         max_length=150,
     )
@@ -42,99 +41,21 @@ class Item(BaseModel):
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
 
-    @property
-    def get_img(self):
-        return get_thumbnail(
-            self.preview,
-            '300x300',
-            crop='center',
-            quality=51
-        )
 
-    def image_tmb(self):
-        if self.preview:
-            print(self.get_img)
-            return mark_safe(
-                f'<img src="{self.get_img.url}"'
-            )
-        return "Нет изображения"
-
-    image_tmb.short_description = 'превью'
-    image_tmb.allow_tags = True
-
-
-class OneImage(models.Model):
-    upload = models.ImageField(
-        'Фото',
-        upload_to='uploads/%Y/%m',
-        default=''
-    )
-    name = models.CharField(
-        'название',
-        unique=True,
-        help_text='Максимальная длина 150',
-        max_length=150,
-    )
+class OneImage(BaseModelImage):
 
     class Meta:
         default_related_name = 'photo'
         verbose_name = 'фото'
         verbose_name_plural = 'фото'
 
-    @property
-    def get_img(self):
-        return get_thumbnail(
-            self.upload,
-            '300x300',
-            crop='center',
-            quality=51
-        )
 
-    def image_tmb(self):
-        if self.upload:
-            return mark_safe(
-                f'<img src="{self.get_img.url}"'
-            )
-        return "Нет изображения"
-
-    def __str__(self):
-        return self.name
-
-
-class Gallery(models.Model):
-    upload = models.ImageField(
-        'Галерея',
-        upload_to='uploads/%Y/%m',
-        default=''
-    )
-    name = models.CharField(
-        'название',
-        unique=True,
-        help_text='Максимальная длина 150',
-        max_length=150,
-    )
+class Gallery(BaseModelImage):
 
     class Meta:
         default_related_name = 'gallery'
         verbose_name = 'галерею'
         verbose_name_plural = 'галерея'
-
-    @property
-    def get_img(self):
-        return get_thumbnail(
-            self.upload,
-            '300x300',
-            crop='center',
-            quality=51
-        )
-
-    def image_tmb(self):
-        print(self.upload)
-        if self.upload:
-            return mark_safe(
-                f'<img src="{self.get_img.url}"'
-            )
-        return "Нет изображения"
 
     item = models.ForeignKey(
         Item,
@@ -143,9 +64,6 @@ class Gallery(models.Model):
         help_text='Выберите товар',
         on_delete=models.CASCADE,
     )
-
-    def __str__(self):
-        return self.name
 
 
 class Tag(BaseModelWithSlug):
