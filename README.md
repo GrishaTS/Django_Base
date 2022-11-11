@@ -40,8 +40,8 @@ DEBUG=boolean_value
 ## Данные тестового админа:
 
 ```commandline
-Username: username_of_admin
-Password: password_of_admin
+Username: admin
+Password: admin
 ```
 
 ## Структура базы данных
