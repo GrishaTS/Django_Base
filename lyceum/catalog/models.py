@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 from django.db import models
 
@@ -11,10 +12,11 @@ class Item(BaseModel):
         help_text='Максимальная длина 150',
         max_length=150,
     )
-    text = models.TextField(
-        'Текст',
-        help_text='В тексте должны быть слова "превосходно" или "роскошно"',
+    text = RichTextField(
+        'описание',
         validators=[validate_must_be_param('превосходно', 'роскошно')],
+        help_text='В тексте должны быть слова "превосходно" или "роскошно"',
+
     )
     category = models.ForeignKey(
         'Category',

@@ -32,10 +32,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+    'sorl.thumbnail',
+    'ckeditor',
     'homepage.apps.HomepageConfig',
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
-    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
