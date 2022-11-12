@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 
-from .models import Category, Item, OneImage, Tag
+from .models import Category, Item, Tag
 
 
 class StaticURLTests(TestCase):
@@ -61,7 +61,6 @@ class TestsForModels(TestCase):
             name='До 20000 руб',
             slug='less-than-20000',
         )
-        cls.OneImage = OneImage.objects.create(name='изображение')
 
     def test_invalid(self):
         item_count = Item.objects.count()
@@ -76,8 +75,7 @@ class TestsForModels(TestCase):
                 self.item = Item(
                     name='Товар-велосипед',
                     category=self.Category,
-                    text=i,
-                    preview=self.OneImage,
+                    text=i
                 )
                 self.item.full_clean()
                 self.item.save()
@@ -89,21 +87,17 @@ class TestsForModels(TestCase):
 
     def test_valid(self):
         item_count = Item.objects.count()
-        for i in enumerate(['превосходно',
-                            'роскошно слово',
-                            'не,роскошно!',
-                            'Превосходно платье',
-                            ',превосходно.',
-                            ],
-                           start=1,
-                           ):
+        for i in enumerate([
+            'превосходно',
+            'роскошно слово',
+            'не,роскошно!',
+            'Превосходно платье',
+            ',превосходно.',
+        ], start=1, ):
             self.item = Item(
                 name='Товар-велосипед' + str(i[0]),
                 category=self.Category,
-                text=i[1],
-                preview=OneImage.objects.create(
-                    name='изображение' + str(i[0])
-                ),
+                text=i[1]
             )
             self.item.full_clean()
             self.item.save()

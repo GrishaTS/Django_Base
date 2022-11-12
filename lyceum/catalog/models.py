@@ -40,6 +40,7 @@ class Preview(BaseModelImage):
         verbose_name='главное изображение',
         help_text='Выберите изображение',
         on_delete=models.CASCADE,
+        null=True
     )
 
     class Meta:
