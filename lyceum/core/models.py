@@ -28,13 +28,7 @@ class BaseModelWithSlug(BaseModel):
         abstract = True
 
 
-class BaseModelImage(models.Model):
-    upload = models.ImageField(
-        'Фото',
-        upload_to='uploads/%Y/%m',
-        default=''
-    )
-
+class BaseModelName(models.Model):
     name = models.CharField(
         'название',
         unique=True,
@@ -45,8 +39,15 @@ class BaseModelImage(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return self.name
+
+class BaseModelImage(models.Model):
+    upload = models.ImageField(
+        'Фото',
+        upload_to='uploads/%Y/%m',
+    )
+
+    class Meta:
+        abstract = True
 
     @property
     def get_img(self):
@@ -58,10 +59,25 @@ class BaseModelImage(models.Model):
         )
 
     def image_tmb(self):
-        print(self.upload)
         if self.upload:
             return mark_safe(
                 f'<img src="{self.get_img.url}"'
+            )
+        return "Нет изображения"
+
+    @property
+    def get_img_small(self):
+        return get_thumbnail(
+            self.upload,
+            '70x70',
+            crop='center',
+            quality=51
+        )
+
+    def image_tmb_small(self):
+        if self.upload:
+            return mark_safe(
+                f'<img src="{self.get_img_small.url}"'
             )
         return "Нет изображения"
 

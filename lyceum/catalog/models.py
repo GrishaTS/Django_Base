@@ -27,14 +27,6 @@ class Item(BaseModel):
         verbose_name='тег',
         help_text='Выберите тег',
     )
-    preview = models.OneToOneField(
-        'OneImage',
-        verbose_name='фотография',
-        help_text='Выберите фотографию',
-        on_delete=models.CASCADE,
-        primary_key=True,
-        default='',
-    )
 
     class Meta:
         default_related_name = 'items'
@@ -42,7 +34,13 @@ class Item(BaseModel):
         verbose_name_plural = 'товары'
 
 
-class OneImage(BaseModelImage):
+class Preview(BaseModelImage):
+    preview = models.OneToOneField(
+        'Item',
+        verbose_name='главное изображение',
+        help_text='Выберите изображение',
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         default_related_name = 'photo'
@@ -50,13 +48,7 @@ class OneImage(BaseModelImage):
         verbose_name_plural = 'фото'
 
 
-class Gallery(BaseModelImage):
-
-    class Meta:
-        default_related_name = 'gallery'
-        verbose_name = 'галерею'
-        verbose_name_plural = 'галерея'
-
+class GalleryImage(BaseModelImage):
     item = models.ForeignKey(
         Item,
         related_name='item',
@@ -64,6 +56,11 @@ class Gallery(BaseModelImage):
         help_text='Выберите товар',
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        default_related_name = 'gallery'
+        verbose_name = 'фото'
+        verbose_name_plural = 'фотогалерея'
 
 
 class Tag(BaseModelWithSlug):
