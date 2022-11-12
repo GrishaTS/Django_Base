@@ -98,7 +98,7 @@ class TestsForModels(TestCase):
                            start=1,
                            ):
             self.item = Item(
-                name='Товар-велосипед',
+                name='Товар-велосипед' + str(i[0]),
                 category=self.Category,
                 text=i[1],
                 preview=OneImage.objects.create(
