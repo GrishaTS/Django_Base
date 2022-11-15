@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, GalleryImage, Item, Preview, Tag
+from .models import Category, GalleryImage, Item, MainImage, Tag
 
 admin.site.register(Category)
 admin.site.register(Tag)
@@ -11,8 +11,8 @@ class GalleryImageInline(admin.TabularInline):
     readonly_fields = 'image_tmb',
 
 
-class PreviewInline(admin.TabularInline):
-    model = Preview
+class MainImageInline(admin.TabularInline):
+    model = MainImage
     readonly_fields = 'image_tmb',
 
 
@@ -23,7 +23,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display_links = 'name',
     filter_horizontal = 'tags',
     inlines = [
-        PreviewInline,
+        MainImageInline,
         GalleryImageInline,
     ]
 

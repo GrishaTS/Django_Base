@@ -36,7 +36,7 @@ class Item(BaseModel):
         verbose_name_plural = 'товары'
 
 
-class Preview(BaseModelImage):
+class MainImage(BaseModelImage):
     preview = models.OneToOneField(
         'Item',
         verbose_name='главное изображение',
