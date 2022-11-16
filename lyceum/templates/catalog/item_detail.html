@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-6">
+    <img
+      src="{{item.photo.get_img.url}}"
+      style="width: 100%"
+      alt="{{item.id}}"
+    >
+  </div>
+  <div class="col-lg-2 col-md-3 col-5">
+    {{item.text|safe}}
+  </div>
+  <div class="col-lg-2 col-md-3 col-4">
+    <ul class="list-group">
+      <li class="list-group-item active" aria-current="true">
+        {{item.category.name}}
+      </li>
+      {% for tag in item.tags.all %}
+        <li class="list-group-item">{{tag.name}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

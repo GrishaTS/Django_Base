@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Главная страница</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for item in items %}
+    {% include "includes/card.html" %}
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -10,7 +10,7 @@ urlpatterns = [
         name='item_list',
     ),
     re_path(
-        r'(?P<pk>^[1-9]\d*)/$',
+        r'(?P<pk>[1-9]\d*)/$',
         views.item_detail,
         name='item_detail',
     )

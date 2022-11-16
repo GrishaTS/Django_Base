@@ -5,7 +5,57 @@ from django.db import models
 from .validators import validate_must_be_param
 
 
+class ItemManager(models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_on_main=True)
+            .select_related('category')
+            .order_by('name')
+            .prefetch_related(
+                models.Prefetch(
+                    'tags',
+                    queryset=Tag.objects.published(),
+                )
+            )
+            .prefetch_related(
+                models.Prefetch(
+                    'photo',
+                    queryset=MainImage.objects.published(),
+                )
+            )
+            .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
+        )
+
+    def item_list(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True)
+            .select_related('category')
+            .order_by('category__name')
+            .prefetch_related(
+                models.Prefetch(
+                    'tags',
+                    queryset=Tag.objects.published(),
+                )
+            )
+            .prefetch_related(
+                models.Prefetch(
+                    'photo',
+                    queryset=MainImage.objects.published(),
+                )
+            )
+            .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
+        )
+
+
 class Item(BaseModel):
+    objects = ItemManager()
+
+    is_on_main = models.BooleanField(
+        'На главную',
+        default=False,
+    )
     name = models.CharField(
         'название',
         unique=True,
@@ -36,7 +86,16 @@ class Item(BaseModel):
         verbose_name_plural = 'товары'
 
 
+class MainImageManager(models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+        )
+
+
 class MainImage(BaseModelImage):
+    objects = MainImageManager()
+
     preview = models.OneToOneField(
         'Item',
         verbose_name='главное изображение',
@@ -66,7 +125,17 @@ class GalleryImage(BaseModelImage):
         verbose_name_plural = 'фотогалерея'
 
 
+class TagManager(models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True)
+        )
+
+
 class Tag(BaseModelWithSlug):
+    objects = TagManager()
+
     name = models.CharField(
         'название',
         unique=True,

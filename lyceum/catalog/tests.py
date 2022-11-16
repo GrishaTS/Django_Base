@@ -1,7 +1,6 @@
-from http import HTTPStatus
-
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
+from django.urls import reverse
 
 from .models import Category, Item, Tag
 
@@ -9,12 +8,12 @@ from .models import Category, Item, Tag
 class StaticURLTests(TestCase):
     def test_item_detail_endpoint(self):
         endpoint_status = {
-            HTTPStatus.OK: (
+            200: (
                 '/catalog/',
-                '/catalog/4783/',
-                '/catalog/1/',
             ),
-            HTTPStatus.NOT_FOUND: (
+            404: (
+                '/catalog/10/',
+                '/catalog/6/',
                 '/catalog/-645/',
                 '/catalog/0/',
                 '/catalog/-0/',
@@ -36,7 +35,7 @@ class StaticURLTests(TestCase):
                 '/catalog/fdafdj_/',
                 '/catalog/2.34:/',
                 '/catalog/12+42-345*213/',
-                r'/catalog/(?P<pk>^[1-9]\d*)/$/',
+                r'/catalog/(?P<pk>[1-9]\d*)/$/',
             ),
         }
         for status, endpoint_list in endpoint_status.items():
@@ -106,3 +105,10 @@ class TestsForModels(TestCase):
                 Item.objects.count(),
                 item_count + i[0],
             )
+
+
+class TaskPagesTests(TestCase):
+    def test_home_page_show_correct_context(self):
+        response = Client().get(reverse('catalog:item_list'))
+        self.assertIn('items', response.context)
+        self.assertEqual(len(response.context), 4)

@@ -8,20 +8,26 @@ admin.site.register(Tag)
 
 class GalleryImageInline(admin.TabularInline):
     model = GalleryImage
-    readonly_fields = 'image_tmb',
+    readonly_fields = ('image_tmb',)
 
 
 class MainImageInline(admin.TabularInline):
     model = MainImage
-    readonly_fields = 'image_tmb',
+    readonly_fields = ('image_tmb',)
 
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = 'name', 'category', 'is_published', 'image_tmb_small',
-    list_editable = 'is_published',
-    list_display_links = 'name',
-    filter_horizontal = 'tags',
+    list_display = (
+        'name',
+        'category',
+        'is_published',
+        'is_on_main',
+        'image_tmb_small'
+    )
+    list_editable = ('is_published', 'is_on_main',)
+    list_display_links = ('name',)
+    filter_horizontal = ('tags',)
     inlines = [
         MainImageInline,
         GalleryImageInline,

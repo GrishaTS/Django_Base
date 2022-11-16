@@ -1,17 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-
-def item_detail(request, pk=1):
-    print(pk)
-    if pk == '1':
-        template_name = 'catalog/index_detail1.html'
-    elif pk == '2':
-        template_name = 'catalog/index_detail2.html'
-    else:
-        template_name = 'catalog/index_detail.html'
-    return render(request, template_name)
+from .models import Item
 
 
 def item_list(request):
-    template_name = 'catalog/index.html'
-    return render(request, template_name)
+    template_name = 'catalog/item_list.html'
+    item = Item.objects.item_list()
+    context = {
+        'items': item
+    }
+    return render(request, template_name, context)
+
+
+def item_detail(request, pk=1):
+    template_name = 'catalog/item_detail.html'
+    item = get_object_or_404(Item, pk=pk)
+    context = {
+        'item': item
+    }
+    return render(request, template_name, context)
