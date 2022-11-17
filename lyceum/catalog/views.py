@@ -5,16 +5,19 @@ from .models import Item
 
 def item_list(request):
     template_name = 'catalog/item_list.html'
-    item = Item.objects.item_list()
+    items = Item.objects.published().order_by('category__name', 'name')
     context = {
-        'items': item
+        'items': items
     }
     return render(request, template_name, context)
 
 
 def item_detail(request, pk=1):
     template_name = 'catalog/item_detail.html'
-    item = get_object_or_404(Item, pk=pk)
+    item = get_object_or_404(
+        Item.objects.published(),
+        pk=pk,
+    )
     context = {
         'item': item
     }

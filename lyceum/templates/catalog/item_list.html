@@ -5,20 +5,20 @@
 {% block content %}
 
 <div>
-  <h1>Список товаров</h1>
+  <h1 style="margin-left: 50px">Список товаров</h1>
   {% for item in items %}
     
     {% ifchanged %}
       </div>
-      <h3>{{item.category.name}}</h3>
+      <h3 class="container-sm">{{item.category.name}}</h3>
       <div class="row row-cols-1 row-cols-md-3 g-4">
     {% endifchanged %}
     
-    {% include "includes/card.html" %}
+    {% include "catalog/includes/card.html" %}
 
   {% endfor %}
-  <h4>Конец списка</h4>
 </div>
+<h4 style="margin-left: 50px">Конец списка</h4>
 <div class="d-flex justify-content-center">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>

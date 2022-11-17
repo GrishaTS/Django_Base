@@ -9,30 +9,9 @@ class ItemManager(models.Manager):
     def published(self):
         return (
             self.get_queryset()
-            .filter(is_on_main=True)
-            .select_related('category')
-            .order_by('name')
-            .prefetch_related(
-                models.Prefetch(
-                    'tags',
-                    queryset=Tag.objects.published(),
-                )
-            )
-            .prefetch_related(
-                models.Prefetch(
-                    'photo',
-                    queryset=MainImage.objects.published(),
-                )
-            )
-            .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
-        )
-
-    def item_list(self):
-        return (
-            self.get_queryset()
             .filter(is_published=True)
             .select_related('category')
-            .order_by('category__name')
+            .order_by('name')
             .prefetch_related(
                 models.Prefetch(
                     'tags',

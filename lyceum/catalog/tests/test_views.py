@@ -1,15 +1,7 @@
-from catalog.models import Category, Item
 from django.test import Client, TestCase
 from django.urls import reverse
 
-
-class StaticURLTests(TestCase):
-    def test_homepage_endpoint(self):
-        response = Client().get('/')
-        self.assertEqual(
-            response.status_code,
-            200,
-        )
+from ..models import Category, Item
 
 
 class TaskPagesTests(TestCase):
@@ -24,11 +16,11 @@ class TaskPagesTests(TestCase):
             cls.Item = Item.objects.create(
                 name=f'товар{i}',
                 text='превосходно',
-                is_on_main=bool(i % 2),
+                is_published=bool(i % 2),
                 category=cls.Category,
             )
 
-    def test_home_page_show_correct_context(self):
-        response = Client().get(reverse('homepage:home'))
+    def test_item_list_page_show_correct_context(self):
+        response = Client().get(reverse('catalog:item_list'))
         self.assertIn('items', response.context)
         self.assertEqual(len(response.context), 14)
