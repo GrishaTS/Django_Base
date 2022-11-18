@@ -18,12 +18,7 @@ class ItemManager(models.Manager):
                     queryset=Tag.objects.published(),
                 )
             )
-            .prefetch_related(
-                models.Prefetch(
-                    'photo',
-                    queryset=MainImage.objects.published(),
-                )
-            )
+            .select_related('photo')
             .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
         )
 
@@ -65,17 +60,8 @@ class Item(BaseModel):
         verbose_name_plural = 'товары'
 
 
-class MainImageManager(models.Manager):
-    def published(self):
-        return (
-            self.get_queryset()
-        )
-
-
 class MainImage(BaseModelImage):
-    objects = MainImageManager()
-
-    preview = models.OneToOneField(
+    item = models.OneToOneField(
         'Item',
         verbose_name='главное изображение',
         help_text='Выберите изображение',

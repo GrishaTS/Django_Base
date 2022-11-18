@@ -1,6 +1,3 @@
-.img-circle {
-    border-radius: 100%;
-}
 .bg-1 {
     background-color: #faebd7;
     color: #000000;
@@ -19,4 +16,15 @@
 }
 .wrapper {
     width: 1170px;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1;
+}
+footer {
+    flex-shrink: 0;
 }

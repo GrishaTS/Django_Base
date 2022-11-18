@@ -12,8 +12,6 @@
     href="{% static 'bootstrap/css/bootstrap.min.css' %}"
     >
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    
-
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -36,7 +34,7 @@
   </head>
   <body>
     {% include "includes/header.html" %}
-    <main>{% block content %}Контент не подвезли{% endblock %}</main>
+      <main style="margin-left: 50px">{% block content %}Контент не подвезли{% endblock %}</main>
     {% include "includes/footer.html" %}
   </body>
 </html>

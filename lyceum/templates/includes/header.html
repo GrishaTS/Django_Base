@@ -1,7 +1,6 @@
 {% load static %}
-
 <header
-  class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+  class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-0 border-bottom"
 >
 <img
     src="{% static 'logo/main_logo.jpg' %}"
@@ -46,12 +45,5 @@
       >
     </li>
   </ul>
-  {% endwith %} 
-  {% comment %}
-  <div class="col-md-3 text-end">
-    Оставил на случай, если мы будем делать систему аккаунтов
-    <button type="button" class="btn btn-outline-primary me-2">Войти</button>
-    <button type="button" class="btn btn-primary">Авторизация</button>
-  </div>
-  {% endcomment %}
+  {% endwith %}
 </header>
