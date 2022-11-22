@@ -34,6 +34,7 @@ class BaseModelName(models.Model):
         unique=True,
         help_text='Максимальная длина 150',
         max_length=150,
+        null=True,
     )
 
     class Meta:

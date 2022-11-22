@@ -23,6 +23,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('about/', include('about.urls', namespace='about')),
     path('admin/', admin.site.urls),
+    path('feedback/', include('feedback.urls', namespace='feedback')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

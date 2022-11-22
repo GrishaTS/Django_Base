@@ -23,4 +23,4 @@ class TaskPagesTests(TestCase):
     def test_item_list_page_show_correct_context(self):
         response = Client().get(reverse('catalog:item_list'))
         self.assertIn('items', response.context)
-        self.assertEqual(len(response.context), 14)
+        self.assertEqual(len(response.context['items']), 10)

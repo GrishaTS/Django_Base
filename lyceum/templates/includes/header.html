@@ -44,6 +44,13 @@
         >О проекте</a
       >
     </li>
+    <li class="nav-item">
+      <a
+        href="{% url 'feedback:feedback' %}"
+        class="{% if view_name == 'feedback:feedback' %}nav-link disabled{% else %}nav-link{% endif %}"
+        >Обратная связь</a
+      >
+    </li>
   </ul>
   {% endwith %}
 </header>

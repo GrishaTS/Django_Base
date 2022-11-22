@@ -31,4 +31,4 @@ class TaskPagesTests(TestCase):
     def test_home_page_show_correct_context(self):
         response = Client().get(reverse('homepage:home'))
         self.assertIn('items', response.context)
-        self.assertEqual(len(response.context), 14)
+        self.assertEqual(len(response.context['items']), 10)
