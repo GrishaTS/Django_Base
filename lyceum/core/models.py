@@ -43,7 +43,7 @@ class BaseModelName(models.Model):
 
 class BaseModelImage(models.Model):
     upload = models.ImageField(
-        'Фото',
+        'фото',
         upload_to='uploads/%Y/%m',
     )
 

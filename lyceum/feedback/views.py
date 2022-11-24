@@ -12,11 +12,13 @@ def feedback(request):
         'form': form,
     }
     if request.method == 'POST' and form.is_valid():
+        name = form.cleaned_data["name"]
+        email = form.cleaned_data['email']
         send_mail(
-            f'Привет, {form.cleaned_data["name"]}',
+            f'Привет, {name}',
             'Мы получили вашу заявку, ожидайте ответа',
             'from@example.com',
-            [form.cleaned_data['email']],
+            [email],
             fail_silently=True,
         )
         new_feedback = Feedback.objects.create(

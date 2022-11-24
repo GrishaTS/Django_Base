@@ -4,7 +4,7 @@ from .models import Feedback
 
 
 @admin.register(Feedback)
-class ItemAdmin(admin.ModelAdmin):
+class FeedbackAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'email',

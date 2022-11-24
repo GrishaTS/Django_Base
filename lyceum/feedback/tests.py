@@ -12,11 +12,11 @@ class FormTest(TestCase):
         cls.form = FeedbackForm()
 
     def test_name_label(self):
-        name_label = FormTest.form.fields['name'].label
+        name_label = self.form.fields['name'].label
         self.assertEquals(name_label, 'Имя')
 
     def test_name_help_text(self):
-        name_help_text = FormTest.form.fields['name'].help_text
+        name_help_text = self.form.fields['name'].help_text
         self.assertEquals(name_help_text, 'Максимальная длина 150')
 
     def test_create_task(self):
