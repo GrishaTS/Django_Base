@@ -12,7 +12,7 @@ def feedback(request):
         'form': form,
     }
     if request.method == 'POST' and form.is_valid():
-        name = form.cleaned_data["name"]
+        name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         send_mail(
             f'Привет, {name}',

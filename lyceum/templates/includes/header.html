@@ -2,14 +2,11 @@
 <header
   class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-0 border-bottom"
 >
-<img
-    src="{% static 'logo/main_logo.jpg' %}"
-    alt="Cat"
-    style="width: 3%">
+  <img src="{% static 'logo/main_logo.jpg' %}" alt="Cat" style="width: 3%" />
   {% with request.resolver_match.view_name as view_name %}
   <a
     href="/"
-    class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+    class="d-flex align-items-center col-md-1 mb-2 mb-md-0 text-dark text-decoration-none"
   >
     <svg
       class="bi me-2"
@@ -52,5 +49,47 @@
       >
     </li>
   </ul>
-  {% endwith %}
+  <div class="col-md-3 text-end">
+    {% if user.is_authenticated %}
+    <a
+      href="{% url 'auth:logout' %}"
+      class="btn btn-outline-primary me-2"
+      role="button"
+      aria-pressed="true"
+      >Выйти</a
+    >
+    <a
+      href="{% url 'users:profile' %}"
+      class="btn btn-outline-primary me-2"
+      role="button"
+      aria-pressed="true"
+      >Мой профиль</a
+    >
+    {% if user.is_superuser %}
+    <a
+      href="{% url 'users:user_list' %}"
+      class="btn btn-outline-primary me-2"
+      role="button"
+      aria-pressed="true"
+      >Профили</a
+    >
+    {% endif %} {% else %}
+    <a
+      href="{% url 'auth:login' %}"
+      class="btn btn-outline-primary me-2"
+      role="button"
+      aria-pressed="true"
+      >Войти</a
+    >
+    <a
+      href="{% url 'users:signup' %}"
+      class="btn btn-outline-primary me-2"
+      role="button"
+      aria-pressed="true"
+      >Авторизироваться</a
+    >
+    {% endif %}
+  </div>
+{% endwith %}
+
 </header>

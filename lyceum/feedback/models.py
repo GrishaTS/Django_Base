@@ -4,7 +4,6 @@ from django.db import models
 class Feedback(models.Model):
     name = models.CharField(
         'имя',
-        unique=True,
         help_text='Максимальная длина 150',
         max_length=150,
         null=True,
