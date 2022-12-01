@@ -40,7 +40,7 @@ DEBUG=boolean_value
 ## Данные тестового админа:
 
 ```commandline
-Username: admin
+email: admin@gmail.com
 Password: admin
 ```
 
@@ -48,3 +48,6 @@ Password: admin
 #### В проекте находится тесовая база данных (db.sqlite), для ознакомления с ее структурой и админкой
 ### Для наглядности структуры можете посмотреть ER-диаграмму:
 ![image](https://user-images.githubusercontent.com/69619529/202220165-2c5f11d2-e1c9-401f-ad1a-c5338c4a1ca7.png)
+### Отдельные таблицы:
+![image](https://user-images.githubusercontent.com/69619529/205171426-428904e8-8f56-4283-8b02-d94f05af44d5.png)
+
