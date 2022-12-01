@@ -20,7 +20,6 @@ def signup(request):
     return render(request, template_name, context)
 
 
-@login_required
 def user_list(request):
     template_name = 'users/user_list.html'
     users = Profile.objects.is_activated()
@@ -30,11 +29,10 @@ def user_list(request):
     return render(request, template_name, context)
 
 
-@login_required
 def user_detail(request, pk):
     template_name = 'users/user_detail.html'
     user_info = get_object_or_404(
-        Profile.objects,
+        Profile.objects.is_activated(),
         pk=pk,
     )
     context = {
@@ -48,7 +46,7 @@ def profile(request):
     template_name = 'users/profile.html'
     form = UpdateProfileForm(request.POST or None)
     user_info = get_object_or_404(
-        Profile.objects,
+        Profile,
         id=request.user.id,
     )
     context = {'form': form, 'user_info': user_info}

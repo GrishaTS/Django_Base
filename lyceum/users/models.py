@@ -1,41 +1,3 @@
-# from django.contrib.auth.models import User
-# from django.db import models
-
-
-# class ProfileManager(models.Manager):
-#     def activated(self):
-#         return (
-#             self.get_queryset()
-#             .select_related('user')
-#             .filter(user__is_active=True)
-#             .only(
-#                'id',
-#                'user__username',
-#                'user__email',
-#                'user__is_superuser'
-#               )
-#         )
-
-
-# class Profile(models.Model):
-#     objects = ProfileManager()
-
-#     user = models.OneToOneField(
-#         User,
-#         on_delete=models.CASCADE
-#     )
-#     birthday = models.DateField(
-#         'дата рождения',
-#         blank=False,
-#         null=True,
-#         auto_now=False,
-#         auto_now_add=False,
-#     )
-
-#     class Meta:
-#         verbose_name = 'доп информация'
-#         verbose_name_plural = 'доп информация'
-
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -50,27 +12,33 @@ class Profile(AbstractBaseUser, PermissionsMixin):
         'имя',
         max_length=150,
         blank=True,
+        null=True,
     )
     last_name = models.CharField(
         'фамилия',
         max_length=150,
         blank=True,
+        null=True,
     )
     email = models.EmailField(
         'почта',
         unique=True,
+        null=True,
     )
     is_active = models.BooleanField(
-        'активный пользователь',
+        'активная учетная запись',
         default=True,
+        null=True,
     )
     is_staff = models.BooleanField(
         'сотрудник',
         default=True,
+        null=True,
     )
     is_superuser = models.BooleanField(
         'Админ',
         default=False,
+        null=True,
     )
     date_joined = models.DateTimeField(default=timezone.now)
     birthday = models.DateField(
@@ -80,10 +48,10 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     )
     USERNAME_FIELD = 'email'
 
-    def __str__(self):
-        return self.email
-
     class Meta:
         default_related_name = 'profiles'
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
+
+    def __str__(self):
+        return self.email

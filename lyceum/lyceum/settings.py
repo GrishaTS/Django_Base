@@ -24,7 +24,7 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = 'auth/login'
+LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = [
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',
     'feedback.apps.FeedbackConfig',
-    'users',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

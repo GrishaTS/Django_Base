@@ -5,10 +5,11 @@ class ProfileManager(BaseUserManager):
     def is_activated(self):
         return (
             self.get_queryset()
-            .filter(is_active=1)
+            .filter(is_active=True)
         )
 
     def create_user(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
         if not email:
             raise ValueError('Users must have an email address')
 

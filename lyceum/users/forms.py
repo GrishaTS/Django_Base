@@ -30,7 +30,11 @@ class UpdateProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'birthday', 'first_name', 'last_name')
+        fields = ('email', 'birthday', 'first_name', 'last_name',)
+        read_only_fields = ('email',)
+        extra_kwargs = {
+            'email': {'read_only': True},
+        }
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
         }

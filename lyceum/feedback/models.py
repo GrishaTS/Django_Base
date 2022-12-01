@@ -19,10 +19,10 @@ class Feedback(models.Model):
     )
     created_on = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         default_related_name = 'fback'
         verbose_name = 'Заявку на фидбек'
         verbose_name_plural = 'Заявки на фидбек'
+
+    def __str__(self):
+        return self.name
