@@ -4,42 +4,7 @@
 
 {% block content %}
 <div class="card">
-  <div class="card-header">
-    <h4>{{ user_info.username }}</h4>
-  </div>
-  <div class="card-body">
-
-    <h5 class="card-title">Информация</h5>
-
-    <p class="card-text">Почта: {{ user_info.email }}</p>
-    
-    <p class="card-text">
-      День рождения: 
-      {% if "{{ user_info.birthday }}" is not None %}
-        {{ user_info.birthday }}
-      {% else %}
-        не указан
-      {% endif %}
-    </p>
-
-    <p class="card-text">
-      Право доступа: 
-      {% if user_info.is_superuser %}
-        Админ
-      {% elif user_info.is_staff %}
-        Сотрудник
-      {% else %}
-        Клиент
-      {% endif %}
-    </p>
-
-    {% if "{{ user_info.first_name }}" is not None %}
-      <p class="card-text">Имя: {{ user_info.first_name }}</p>
-    {% endif %}
-
-    {% if "{{ user_info.last_name }}" is not None %}
-      <p class="card-text">Фамилия: {{ user_info.last_name }}</p>
-    {% endif %}
+  {% include "users/includes/card_of_user.html" %}
 
     <button
       type="button"
@@ -84,5 +49,5 @@
     </div>
   </div>
 </div>
-<img src="{% static 'img/sad_cat.jpg' %}" alt="user" style="width: 30%" />
+<img src="{% static 'img/sad_cat.jpg' %}" alt="user" style="width: 30%">
 {% endblock %}

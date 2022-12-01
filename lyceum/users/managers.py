@@ -9,7 +9,6 @@ class ProfileManager(BaseUserManager):
         )
 
     def create_user(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
         if not email:
             raise ValueError('Users must have an email address')
 

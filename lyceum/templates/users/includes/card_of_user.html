@@ -1,0 +1,33 @@
+<div class="card-header">
+  <h4>Информация о пользователе</h4>
+</div>
+<div class="card-body">
+  <p class="card-text">
+      Почта: {{ user_info.email }}
+  </p>
+  <p class="card-text">
+    День рождения: 
+    {% if user_info.birthday %} 
+      {{ user_info.birthday }} 
+    {% else %}
+      не указан 
+    {% endif %}
+  </p>
+  <p class="card-text">
+    Право доступа: 
+    {% if user_info.is_superuser %} 
+      Админ
+    {% elif user_info.is_staff %} 
+      Сотрудник 
+    {% else %}
+      Клиент
+    {% endif %}
+  </p>
+  {% if user_info.first_name %}
+    <p class="card-text">Имя: {{ user_info.first_name }}</p>
+  {% endif %}
+  
+  {% if user_info.last_name %}
+    <p class="card-text">Фамилия: {{ user_info.last_name }}</p>
+  {% endif %}
+  

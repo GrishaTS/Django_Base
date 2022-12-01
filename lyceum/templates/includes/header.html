@@ -2,7 +2,7 @@
 <header
   class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-0 border-bottom"
 >
-  <img src="{% static 'logo/main_logo.jpg' %}" alt="Cat" style="width: 3%" />
+  <img src="{% static 'logo/main_logo.jpg' %}" alt="Cat" style="width: 3%">
   {% with request.resolver_match.view_name as view_name %}
   <a
     href="/"
@@ -52,7 +52,7 @@
   <div class="col-md-3 text-end">
     <div class="dropdown">
       <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{% static 'img/user.png' %}" alt="user" style="width: 8%" />
+        <img src="{% static 'img/user.png' %}" alt="user" style="width: 8%">
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         {% if user.is_authenticated %}
@@ -61,15 +61,15 @@
           <li>
             <a class="dropdown-item" href="{% url 'auth:logout' %}">
               Выйти   
-              <img src="{% static 'img/logout.png' %}" alt="user" style="width: 4%" />
+              <img src="{% static 'img/logout.png' %}" alt="user" style="width: 4%">
             </a>
           </li>
         {% else %}
           <li><a class="dropdown-item" href="{% url 'auth:login' %}">Авторизироваться</a></li>
           <li><a class="dropdown-item" href="{% url 'users:signup' %}">Регистрироваться</a></li>
+        {% endif %}
       </ul>
     </div>
-    {% endif %}
   </div>
 {% endwith %}
 

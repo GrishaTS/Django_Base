@@ -32,7 +32,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     )
     is_staff = models.BooleanField(
         'сотрудник',
-        default=True,
+        default=False,
         null=True,
     )
     is_superuser = models.BooleanField(
