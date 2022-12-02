@@ -6,6 +6,13 @@
 
 <div class="card">
   {% include "users/includes/card_of_user.html" %}
+  <td>
+    <a
+      href="{% url 'users:user_list' %}"
+      class="btn btn-primary"
+    >К списку пользователей</a>
+  </td>
   </div>
 </div>
+
 {% endblock %}

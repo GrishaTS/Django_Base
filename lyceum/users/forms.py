@@ -1,9 +1,7 @@
 from django import forms
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.contrib.auth.models import User
 
-User = get_user_model()
+from .models import Profile
 
 
 class CreateProfileForm(UserCreationForm):
@@ -13,7 +11,7 @@ class CreateProfileForm(UserCreationForm):
             field.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = User
+        model = Profile
         fields = ('email',)
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
@@ -29,12 +27,8 @@ class UpdateProfileForm(UserChangeForm):
     password = None
 
     class Meta:
-        model = User
+        model = Profile
         fields = ('email', 'birthday', 'first_name', 'last_name',)
-        read_only_fields = ('email',)
-        extra_kwargs = {
-            'email': {'read_only': True},
-        }
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
         }

@@ -44,7 +44,7 @@ def user_detail(request, pk):
 @login_required
 def profile(request):
     template_name = 'users/profile.html'
-    form = UpdateProfileForm(request.POST or None)
+    form = UpdateProfileForm(request.POST or None, instance=request.user)
     user_info = get_object_or_404(
         Profile,
         id=request.user.id,

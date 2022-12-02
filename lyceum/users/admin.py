@@ -5,6 +5,7 @@ from .forms import CreateProfileForm, UpdateProfileForm
 from .models import Profile
 
 
+@admin.register(Profile)
 class CastomUserAdmin(UserAdmin):
     model = Profile
     form = UpdateProfileForm
@@ -15,7 +16,7 @@ class CastomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('birthday',)}),
-        ('Permissions', {'fields': ('is_superuser', 'is_active')}),
+        ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active')}),
     )
     add_fieldsets = (
         (None, {
@@ -33,6 +34,3 @@ class CastomUserAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
-
-
-admin.site.register(Profile, CastomUserAdmin)
