@@ -6,7 +6,7 @@ from .models import Profile
 
 
 @admin.register(Profile)
-class CastomUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):
     model = Profile
     form = UpdateProfileForm
     add_form = CreateProfileForm
