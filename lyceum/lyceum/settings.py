@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'ckeditor',
     'debug_toolbar',
+    'widget_tweaks',
     'homepage.apps.HomepageConfig',
     'catalog.apps.CatalogConfig',
     'about.apps.AboutConfig',

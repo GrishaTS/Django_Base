@@ -7,13 +7,12 @@
   {% include "users/includes/form.html" %}
   {% endfor %}
   <button type="submit" class="btn btn-primary">Войти</button>
-</form>
-
-<a
+  <a
   href="{% url 'auth:password_reset' %}"
   class="btn btn-outline-primary me-2"
   role="button"
   aria-pressed="true"
   >Забыли пароль?</a
 >
+</form>
 {% endblock %}

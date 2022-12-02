@@ -9,3 +9,4 @@ sorl-thumbnail==12.9.0
 sqlparse==0.4.3
 django-ckeditor==6.5.1
 django-debug-toolbar==3.7.0
+django-widget-tweaks==1.4.12
