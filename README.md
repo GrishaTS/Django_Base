@@ -49,3 +49,4 @@ Password: admin
 ### Для наглядности структуры можете посмотреть ER-диаграмму:
 ![image](https://user-images.githubusercontent.com/69619529/202220165-2c5f11d2-e1c9-401f-ad1a-c5338c4a1ca7.png)
 ### Отдельные таблицы:
+![image](https://user-images.githubusercontent.com/69619529/205300568-9c10b5b2-1bf2-46a6-822f-cf257e288af4.png)
