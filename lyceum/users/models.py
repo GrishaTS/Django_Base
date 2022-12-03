@@ -36,7 +36,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
         null=True,
     )
     is_superuser = models.BooleanField(
-        'Админ',
+        'админ',
         default=False,
         null=True,
     )

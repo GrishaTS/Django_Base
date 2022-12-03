@@ -3,10 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 
 class ProfileManager(BaseUserManager):
     def is_activated(self):
-        return (
-            self.get_queryset()
-            .filter(is_active=True)
-        )
+        return (self.get_queryset().filter(is_active=True))
 
     def create_user(self, email, password, **extra_fields):
         if not email:
