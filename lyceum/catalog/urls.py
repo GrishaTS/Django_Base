@@ -7,12 +7,12 @@ app_name = 'catalog'
 urlpatterns = [
     path(
         '',
-        views.item_list,
+        views.ItemListView.as_view(),
         name='item_list',
     ),
     re_path(
         r'^(?P<pk>[1-9]\d*)/$',
-        views.item_detail,
+        views.ItemDetailView.as_view(),
         name='item_detail',
     )
 ]
