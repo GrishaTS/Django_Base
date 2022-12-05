@@ -1,0 +1,27 @@
+</div class="container">
+<h4>Сегодня день рождения у пользователей:</h4>
+{% if not users %}
+<div class="alert alert-light" role="alert">
+    Сегодня таких пользователей нет    
+</div>
+
+{% else %}
+<table class="table table-light table-striped table-bordered">
+  <thead>
+    <tr class="table-light">
+      <th scope="col">Email пользователя</th>
+      <th scope="col">Имя пользователя</th>
+    </tr>
+  </thead>
+<tbody>
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{user.email}} </th>
+      <th>
+      {{user.first_name}}
+      </th>
+  {% endfor %}
+</tbody>
+</table>
+{% endif %}
+</div>
