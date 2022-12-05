@@ -23,7 +23,7 @@ class ItemAdmin(admin.ModelAdmin):
         'category',
         'is_published',
         'is_on_main',
-        'image_tmb_small'
+        'image_tmb_small',
     )
     list_editable = ('is_published', 'is_on_main',)
     list_display_links = ('name',)

@@ -19,7 +19,7 @@ class ItemManager(models.Manager):
                 )
             )
             .select_related('photo')
-            .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
+            .only('id', 'name', 'text', 'category__name', 'tags', 'photo',)
         )
 
 
@@ -95,6 +95,7 @@ class TagManager(models.Manager):
         return (
             self.get_queryset()
             .filter(is_published=True)
+            .only('name')
         )
 
 

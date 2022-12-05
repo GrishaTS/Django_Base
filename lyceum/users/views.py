@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, ListView
 
@@ -12,7 +12,7 @@ class SignUpView(FormView):
     template_name = 'users/signup.html'
     model = Profile
     form_class = CreateProfileForm
-    success_url = reverse_lazy('users:profile')
+    success_url = '/users/profile'
 
     def form_valid(self, form):
         user = form.save()
@@ -43,4 +43,11 @@ class ProfileView(LoginRequiredMixin, FormView):
         form = self.form_class(request.POST or None, instance=request.user)
         if form.is_valid():
             form.save()
-        return render(request, self.template_name, {'form': form})
+        return render(
+            request,
+            self.template_name,
+            {'form': form},
+        )
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)

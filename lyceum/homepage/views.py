@@ -1,6 +1,6 @@
-from catalog.models import Item
-from django.shortcuts import render
 from django.views.generic import ListView
+
+from catalog.models import Item
 
 
 class HomeView(ListView):
