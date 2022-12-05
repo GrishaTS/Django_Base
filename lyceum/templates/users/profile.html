@@ -3,18 +3,17 @@
 {% load static %}
 
 {% block content %}
-<div class="card">
+<div class="card col-6">
   {% include "users/includes/card_of_user.html" %}
-
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-dark"
       data-bs-toggle="modal"
       data-bs-target="#modal-cart"
     >
       Редактировать профиль
     </button>
-    <a href="{% url 'auth:password_change' %}" class="btn btn-primary">Изменить пароль</a>
+    <a href="{% url 'auth:password_change' %}" class="btn btn-dark">Изменить пароль</a>
     <div
       class="modal fade"
       id="modal-cart"
@@ -24,7 +23,7 @@
     >
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
-          <div class="modal-header bg-secondary text-white">
+          <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
               Редактирование профиля
             </h5>
@@ -33,15 +32,16 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              style="background-color: #FBF2EB;"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="background-color: #FBF2EB;">
             <form method="post">
               {% csrf_token %}
               {% for field in form %}
               {% include "users/includes/form.html" %}
               {% endfor %}
-              <button type="submit" class="btn btn-primary">Отправить</button>
+              <button type="submit" class="btn btn-dark">Отправить</button>
             </form>
           </div>
         </div>

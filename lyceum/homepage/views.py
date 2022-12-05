@@ -4,8 +4,8 @@ from django.shortcuts import render
 
 def home(request):
     template_name = 'homepage/homepage.html'
-    item = Item.objects.published().filter(is_on_main=True)
+    items = Item.objects.published().filter(is_on_main=True)
     context = {
-        'items': item
+        'items': items
     }
     return render(request, template_name, context)

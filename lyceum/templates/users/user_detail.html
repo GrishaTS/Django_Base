@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<div class="card">
+<div class="card col-6">
   {% include "users/includes/card_of_user.html" %}
   <td>
     <a
       href="{% url 'users:user_list' %}"
-      class="btn btn-primary"
+      class="btn btn-dark"
     >К списку пользователей</a>
   </td>
   </div>

@@ -64,7 +64,7 @@ class BaseModelImage(models.Model):
             return mark_safe(
                 f'<img src="{self.get_img.url}"'
             )
-        return "Нет изображения"
+        return 'Нет изображения'
 
     @property
     def get_img_small(self):
@@ -80,7 +80,7 @@ class BaseModelImage(models.Model):
             return mark_safe(
                 f'<img src="{self.get_img_small.url}"'
             )
-        return "Нет изображения"
+        return 'Нет изображения'
 
     image_tmb.short_description = 'превью'
     image_tmb.allow_tags = True

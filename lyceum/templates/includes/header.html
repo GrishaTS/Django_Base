@@ -1,76 +1,66 @@
 {% load static %}
-<header
-  class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-0 border-bottom"
->
-  <img src="{% static 'logo/main_logo.jpg' %}" alt="Cat" style="width: 3%">
-  {% with request.resolver_match.view_name as view_name %}
-  <a
-    href="/"
-    class="d-flex align-items-center col-md-1 mb-2 mb-md-0 text-dark text-decoration-none"
-  >
-    <svg
-      class="bi me-2"
-      width="40"
-      height="32"
-      role="img"
-      aria-label="Bootstrap"
-    >
-      <use xlink:href="#bootstrap"></use>
-    </svg>
-  </a>
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a
-        href="{% url 'homepage:home' %}"
-        class="{% if view_name == 'homepage:home' %}nav-link disabled{% else %}nav-link{% endif %}"
-        aria-current="page"
-        >Главная</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        href="{% url 'catalog:item_list' %}"
-        class="{% if view_name == 'catalog:item_list' %}nav-link disabled{% else %}nav-link{% endif %}"
-        >Список товаров</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        href="{% url 'about:description' %}"
-        class="{% if view_name == 'about:description' %}nav-link disabled{% else %}nav-link{% endif %}"
-        >О проекте</a
-      >
-    </li>
-    <li class="nav-item">
-      <a
-        href="{% url 'feedback:feedback' %}"
-        class="{% if view_name == 'feedback:feedback' %}nav-link disabled{% else %}nav-link{% endif %}"
-        >Обратная связь</a
-      >
-    </li>
-  </ul>
-  <div class="col-md-3 text-end">
-    <div class="dropdown">
-      <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{% static 'img/user.png' %}" alt="user" style="width: 8%">
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        {% if user.is_authenticated %}
-          <li><a class="dropdown-item" href="{% url 'users:profile' %}">Мой профиль</a></li>
-          <li><a class="dropdown-item" href="{% url 'users:user_list' %}">Профили</a></li>
-          <li>
-            <a class="dropdown-item" href="{% url 'auth:logout' %}">
-              Выйти   
-              <img src="{% static 'img/logout.png' %}" alt="user" style="width: 4%">
-            </a>
-          </li>
-        {% else %}
-          <li><a class="dropdown-item" href="{% url 'auth:login' %}">Авторизироваться</a></li>
-          <li><a class="dropdown-item" href="{% url 'users:signup' %}">Зарегистрироваться</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-{% endwith %}
 
-</header>
+<div class="container">
+  {% with request.resolver_match.view_name as view_name %}
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <img src="{% static 'logo/main_logo.png' %}" alt="Cat" style="width: 4%">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+            <li class="nav-item">
+              <a 
+                class="{% if view_name == 'homepage:home' %}nav-link disabled{% else %}nav-link{% endif %}"
+                href="{% url 'homepage:home' %}"
+              >Главная</a>
+            </li>
+            
+            <li class="nav-item">
+              <a
+               class="{% if view_name == 'catalog:item_list' %}nav-link disabled{% else %}nav-link{% endif %}"
+               href="{% url 'catalog:item_list' %}"
+              >Список товаров</a>
+            </li>
+            <li class="nav-item">
+              <a
+               class="{% if view_name == 'about:description' %}nav-link disabled{% else %}nav-link{% endif %}"
+               href="{% url 'about:description' %}"
+              >О проекте</a>
+            </li>
+            <li class="nav-item">
+              <a
+               class="{% if view_name == 'feedback:feedback' %}nav-link disabled{% else %}nav-link{% endif %}"
+               href="{% url 'feedback:feedback' %}"
+              >Обратная связь</a>
+            </li>
+          </ul>
+  
+          <ul class="navbar-nav col-md-6 text-end">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="{% static 'img/user.png' %}" alt="user" style="width: 8%"></i></a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #857f7a;">
+                {% if user.is_authenticated %}
+                  <li><a class="dropdown-item" style="color: white;" href="{% url 'users:profile' %}">Мой профиль</a></li>
+                  <li><a class="dropdown-item" style="color: white;" href="{% url 'users:user_list' %}">Профили</a></li>
+                  <li>
+                    <a class="dropdown-item" style="color: white;" href="{% url 'auth:logout' %}">
+                      Выйти   
+                      <img src="{% static 'img/logout.png' %}" alt="user" style="width: 15px">
+                    </a>
+                  </li>
+                {% else %}
+                  <li><a class="dropdown-item" style="color: white;" href="{% url 'auth:login' %}">Авторизация</a></li>
+                  <li><a class="dropdown-item" style="color: white;" href="{% url 'users:signup' %}">Регистрация</a></li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  {% endwith %}
+</div>

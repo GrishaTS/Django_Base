@@ -3,37 +3,38 @@
 {% load static %}
 
 {% block content %}
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Почта</th>
-      <th scope="col">Доступ</th>
-      <th scope="col">Подробнее</th> 
-    </tr>
-  </thead>
-  <tbody>
-    {% for field in users_info %}
+<div class="col-10">
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row">{{ field.id }}</th>
-        <td>{{ field.email }}</td> 
-        {% if field.is_superuser %}
-          <td>Админ</td>
-        {% elif field.is_staff %}
-          <td>Сотрудник</td>
-        {% else %}
-          <td>Клиент</td>
-        {% endif %}
-        <td>
-          <a
-            href="{% url 'users:user_detail' field.id %}"
-            class="btn btn-primary"
-          >К пользователю</a>
-        </td>
+        <th scope="col">id</th>
+        <th scope="col">Почта</th>
+        <th scope="col">Доступ</th>
+        <th scope="col">Подробнее</th> 
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for field in users_info %}
+        <tr>
+          <th scope="row">{{ field.id }}</th>
+          <td>{{ field.email }}</td> 
+          {% if field.is_superuser %}
+            <td>Админ</td>
+          {% elif field.is_staff %}
+            <td>Сотрудник</td>
+          {% else %}
+            <td>Клиент</td>
+          {% endif %}
+          <td>
+            <a
+              href="{% url 'users:user_detail' field.id %}"
+              class="btn btn-dark"
+            >К пользователю</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}

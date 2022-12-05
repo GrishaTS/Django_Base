@@ -6,10 +6,10 @@
   {% for field in form %}
   {% include "users/includes/form.html" %}
   {% endfor %}
-  <button type="submit" class="btn btn-primary">Войти</button>
+  <button type="submit" class="btn btn-dark">Войти</button>
   <a
   href="{% url 'auth:password_reset' %}"
-  class="btn btn-outline-primary me-2"
+  class="btn btn-outline-dark me-2"
   role="button"
   aria-pressed="true"
   >Забыли пароль?</a

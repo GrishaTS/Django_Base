@@ -21,8 +21,8 @@ class Feedback(models.Model):
 
     class Meta:
         default_related_name = 'fback'
-        verbose_name = 'Заявку на фидбек'
-        verbose_name_plural = 'Заявки на фидбек'
+        verbose_name = 'заявку на фидбек'
+        verbose_name_plural = 'заявки на фидбек'
 
     def __str__(self):
         return self.name

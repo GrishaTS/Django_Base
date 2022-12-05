@@ -36,4 +36,4 @@ class ItemAdmin(admin.ModelAdmin):
     def image_tmb_small(self, obj):
         if obj.photo:
             return obj.photo.image_tmb_small()
-        return "Нет изображения"
+        return 'Нет изображения'

@@ -1,4 +1,4 @@
-<div class="card mb-3" style="max-width: 500px; margin-left: 30px">
+<div class="card mb-3" style="max-width: 500px; margin-left: 30px; background-color: #ddd7d2;">
   <div class="row g-0">
     <div class="col-md-4">
       <img
@@ -12,7 +12,7 @@
         <h5 class="card-title">{{item.name}}</h5>
         {{item.text|safe|truncatewords:10}}
         <p class="card-text">
-          <small class="text-muted"
+          <small
             >Теги: 
             {% for tag in item.tags.all %}
               {% if forloop.last %}
@@ -26,13 +26,13 @@
         {% with request.resolver_match.view_name as view_name %}
           {% if view_name == 'homepage:home' %}
             <p class="card-text">
-              <small class="text-muted"> Категория: {{item.category.name}} </small>
+              <small> Категория: {{item.category.name}} </small>
             </p>
           {% endif %}
         {% endwith%}
         <a
           href="{% url 'catalog:item_detail' item.id %}"
-          class="btn btn-primary"
+          class="btn btn-dark"
           >К товару</a
         >
       </div>

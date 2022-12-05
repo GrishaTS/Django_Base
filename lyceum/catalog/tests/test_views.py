@@ -1,7 +1,6 @@
+from catalog.models import Category, Item
 from django.test import Client, TestCase
 from django.urls import reverse
-
-from ..models import Category, Item
 
 
 class TaskPagesTests(TestCase):
@@ -14,7 +13,7 @@ class TaskPagesTests(TestCase):
         )
         for i in range(20):
             cls.Item = Item.objects.create(
-                name=f'товар{i}',
+                name=f'товар {i}',
                 text='превосходно',
                 is_published=bool(i % 2),
                 category=cls.Category,

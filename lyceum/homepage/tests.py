@@ -22,7 +22,7 @@ class TaskPagesTests(TestCase):
         )
         for i in range(20):
             cls.Item = Item.objects.create(
-                name=f'товар{i}',
+                name=f'товар {i}',
                 text='превосходно',
                 is_on_main=bool(i % 2),
                 category=cls.Category,

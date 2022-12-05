@@ -27,7 +27,7 @@ class Item(BaseModel):
     objects = ItemManager()
 
     is_on_main = models.BooleanField(
-        'На главную',
+        'на главную',
         default=False,
     )
     name = models.CharField(
