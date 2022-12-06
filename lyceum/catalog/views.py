@@ -1,5 +1,5 @@
 from django.db.models import Avg
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, FormView, ListView
 
 from catalog.models import Item
@@ -26,7 +26,10 @@ class ItemDetailView(DetailView, FormView):
             initial={'rate': 3},
         )
         user = request.user
-        item = Item.objects.get(pk=pk)
+        item = get_object_or_404(
+            Item.objects.published(),
+            pk=pk
+        )
         if user.is_authenticated:
             rate = Rating.objects.filter(
                 user=user,
