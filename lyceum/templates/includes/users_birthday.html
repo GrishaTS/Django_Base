@@ -1,12 +1,27 @@
-<div class="container">
-  <div class="row">
-    {% for user in users %}
-    <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" style="margin: 10px; background-color: #ddd7d2; color: #000;">
-      <div class="toast-header" style="background-color: #ddd7d2; color: #000;">
-        <strong class="me-auto">Сегодня день рождение у {{ user.email }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+</div class="container">
+<h4>Сегодня день рождения у пользователей:</h4>
+{% if not users %}
+<div class="alert alert-light" role="alert">
+    Сегодня таких пользователей нет    
+</div>
+
+{% else %}
+<table class="table table-light table-striped table-bordered">
+  <thead>
+    <tr class="table-light">
+      <th scope="col">Email пользователя</th>
+      <th scope="col">Имя пользователя</th>
+    </tr>
+  </thead>
+<tbody>
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{user.email}} </th>
+      <th>
+      {{user.first_name}}
+      </th>
+  {% endfor %}
+</tbody>
+</table>
+{% endif %}
 </div>

@@ -56,13 +56,13 @@ class BaseModelImage(models.Model):
             self.upload,
             '300x300',
             crop='center',
-            quality=51,
+            quality=51
         )
 
     def image_tmb(self):
         if self.upload:
             return mark_safe(
-                f'<img src="{self.get_img.url}"',
+                f'<img src="{self.get_img.url}"'
             )
         return 'Нет изображения'
 
@@ -78,7 +78,7 @@ class BaseModelImage(models.Model):
     def image_tmb_small(self):
         if self.upload:
             return mark_safe(
-                f'<img src="{self.get_img_small.url}"',
+                f'<img src="{self.get_img_small.url}"'
             )
         return 'Нет изображения'
 

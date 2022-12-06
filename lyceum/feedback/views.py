@@ -1,18 +1,17 @@
 from django.core.mail import send_mail
-from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.shortcuts import redirect, render
 
 from .forms import FeedbackForm
 from .models import Feedback
 
 
-class FeedBackView(FormView):
-    model = Feedback
-    form_class = FeedbackForm
+def feedback(request):
     template_name = 'feedback/index.html'
-    success_url = reverse_lazy('feedback:feedback')
-
-    def form_valid(self, form):
+    form = FeedbackForm(request.POST or None)
+    context = {
+        'form': form,
+    }
+    if request.method == 'POST' and form.is_valid():
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         send_mail(
@@ -22,5 +21,9 @@ class FeedBackView(FormView):
             [email],
             fail_silently=True,
         )
-        form.save()
-        return super().form_valid(form)
+        new_feedback = Feedback.objects.create(
+            **form.cleaned_data
+        )
+        new_feedback.save()
+        return redirect('feedback:feedback')
+    return render(request, template_name, context)
