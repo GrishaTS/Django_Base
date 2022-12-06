@@ -17,22 +17,23 @@ class ItemDetailView(DetailView, FormView):
     form_class = RatingForm
     template_name = 'catalog/item_detail.html'
     context_object_name = 'item'
-    '''
-    def get(self, request):
-        form = self.form_class(
-            initial=self.initial,
-            instance=request.user,
-        )
-        context = {'form': form}
-        return render(
-            request,
-            self.template_name,
-            context,
-        )'''
+
     def post(self, request, pk):
         form = self.form_class(request.POST or None)
         if form.is_valid():
-            form.save(user_id=request.user.id, item_id=int(pk))
+            print(form.cleaned_data)
+            data = form.cleaned_data
+            data['user_id'] = request.user.id
+            data['item_id'] = pk
+            print(data)
+            rate = Item(**data)
+            print(rate)
+            rate.save()
             return redirect('catalog:item_detail', pk)
         context = {'form': form}
         return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()
+        return context
