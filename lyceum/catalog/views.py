@@ -1,6 +1,5 @@
-from django.db.models import Avg
-from django.shortcuts import redirect, render
-from django.views.generic import DetailView, FormView, ListView
+from django.views.generic import DetailView, ListView, FormView
+from django.shortcuts import get_object_or_404, redirect, render
 
 from catalog.models import Item
 from rating.forms import RatingForm
@@ -21,35 +20,17 @@ class ItemDetailView(DetailView, FormView):
     context_object_name = 'item'
 
     def get(self, request, pk):
-        form = self.form_class(
-            request.POST or None,
-            initial={'rate': 3},
-        )
-        user = request.user
-        item = Item.objects.get(pk=pk)
-        if user.is_authenticated:
-            rate = Rating.objects.filter(
-                user=user,
-                item=item,
+        form = self.form_class(request.POST or None, initial={'rate': 3})
+        rate = Rating.objects.get(
+            user=request.user,
+            item=get_object_or_404(
+                Item.objects.published(),
+                pk=pk
             )
-            if rate:
-                rate = rate.get(
-                    user=user,
-                    item=item,
-                )
-                form['rate'].initial = rate.rate
-        average_rating = Rating.objects.filter(
-            item=item
-        ).aggregate(Avg('rate'))
-        number_of_ratings = Rating.objects.filter(
-            item=item
-        ).count()
-        context = {
-            'form': form,
-            'item': item,
-            'rate_count': number_of_ratings,
-            'rate': average_rating,
-        }
+        )
+        if rate:
+            form['rate'].initial = rate.rate
+        context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request, pk):
@@ -62,8 +43,8 @@ class ItemDetailView(DetailView, FormView):
                 user=user,
                 item=item,
                 defaults={
-                    'rate': obj.rate,
-                },
+                    'rate': obj.rate
+                }
             )
             return redirect('catalog:item_detail', pk)
         context = {'form': form}
