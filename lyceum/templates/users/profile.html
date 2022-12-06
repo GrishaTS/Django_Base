@@ -5,13 +5,6 @@
 {% block content %}
 <div class="card col-6">
   {% include "users/includes/card_of_user.html" %}
-    {% for field in form %}
-      {% for error in field.errors %}
-        <div class="alert alert-danger">
-          {{ error|escape }}
-        </div>
-      {% endfor %}
-    {% endfor %}
     <button
       type="button"
       class="btn btn-dark"

@@ -38,7 +38,6 @@ class StaticURLTests(TestCase):
             for endpoint in endpoint_list:
                 with self.subTest(endpoint=endpoint):
                     response = Client().get(endpoint)
-                    print(response.status_code)
                     self.assertEqual(
                         response.status_code,
                         status,

@@ -1,7 +1,6 @@
+from catalog.models import Category, Item, Tag
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-
-from catalog.models import Category, Item, Tag
 
 
 class TestsForModels(TestCase):
@@ -42,7 +41,7 @@ class TestsForModels(TestCase):
 
     def test_valid(self):
         item_count = Item.objects.count()
-        for i, text in enumerate([
+        for i in enumerate([
             'превосходно',
             'роскошно слово',
             'не,роскошно!',
@@ -50,14 +49,14 @@ class TestsForModels(TestCase):
             ',превосходно.',
         ], start=1):
             self.item = Item(
-                name=f'Товар-велосипед {i}',
+                name='Товар-велосипед' + str(i[0]),
                 category=self.Category,
-                text=text,
+                text=i[1],
             )
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(self.Tag)
             self.assertEqual(
                 Item.objects.count(),
-                item_count + i,
+                item_count + i[0],
             )
