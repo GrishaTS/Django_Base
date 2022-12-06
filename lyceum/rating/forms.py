@@ -1,14 +1,19 @@
-from django.forms import Form, ChoiceField
+from django.forms import ModelForm, ChoiceField
 
 from rating.models import Rating
 
 
-class RatingForm(Form):
+class RatingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
-    rate_field = ChoiceField(choices=Rating.Rate.choices)
+
+    def save(self, user_id=None, item_id=None):
+        self.item = int(item_id)
+        self.user = user_id
+        super().save()
 
     class Meta:
-        fields = '__all__'
+        model = Rating
+        fields = ('rate',)
