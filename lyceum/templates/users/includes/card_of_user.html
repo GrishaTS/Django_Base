@@ -3,31 +3,31 @@
 </div>
 <div class="card-body">
   <p class="card-text">
-      Почта: {{ user_info.email }}
+      Почта: {{ user.email }}
   </p>
   <p class="card-text">
     День рождения: 
-    {% if user_info.birthday %} 
-      {{ user_info.birthday }} 
+    {% if user.birthday %} 
+      {{ user.birthday }} 
     {% else %}
       не указан 
     {% endif %}
   </p>
   <p class="card-text">
     Право доступа: 
-    {% if user_info.is_superuser %} 
+    {% if user.is_superuser %} 
       Админ
-    {% elif user_info.is_staff %} 
+    {% elif user.is_staff %} 
       Сотрудник 
     {% else %}
       Клиент
     {% endif %}
   </p>
-  {% if user_info.first_name %}
-    <p class="card-text">Имя: {{ user_info.first_name }}</p>
+  {% if user.first_name %}
+    <p class="card-text">Имя: {{ user.first_name }}</p>
   {% endif %}
   
-  {% if user_info.last_name %}
-    <p class="card-text">Фамилия: {{ user_info.last_name }}</p>
+  {% if user.last_name %}
+    <p class="card-text">Фамилия: {{ user.last_name }}</p>
   {% endif %}
   

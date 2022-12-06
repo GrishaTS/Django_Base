@@ -1,6 +1,7 @@
-from catalog.models import Category, Item
 from django.test import Client, TestCase
 from django.urls import reverse
+
+from catalog.models import Category, Item
 
 
 class StaticURLTests(TestCase):

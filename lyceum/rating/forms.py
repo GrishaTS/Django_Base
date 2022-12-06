@@ -1,14 +1,15 @@
-from django import forms
+from django.forms import ModelForm, Select
 
-from feedback.models import Feedback
+from rating.models import Rating
 
 
-class FeedbackForm(forms.ModelForm):
+class RatingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = Feedback
+        model = Rating
         fields = '__all__'
+        exclude = ('user', 'item',)

@@ -1,57 +1,65 @@
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, FormView, ListView
 
-from .forms import CreateProfileForm, UpdateProfileForm
-from .models import Profile
+from users.forms import CreateProfileForm, UpdateProfileForm
+from users.models import Profile
 
 
-def signup(request):
+class SignUpView(FormView):
     template_name = 'users/signup.html'
-    form = CreateProfileForm(request.POST or None)
-    context = {
-        'form': form,
-    }
-    if request.method == 'POST' and form.is_valid():
+    model = Profile
+    form_class = CreateProfileForm
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
         user = form.save()
-        login(request, user)
-        return redirect('users:profile')
-    return render(request, template_name, context)
+        login(self.request, user)
+        return super().form_valid(form)
 
 
-def user_list(request):
+class UserListView(ListView):
     template_name = 'users/user_list.html'
-    users = Profile.objects.is_activated()
-    context = {
-        'users_info': users,
-    }
-    return render(request, template_name, context)
+    model = Profile
+    context_object_name = 'users_info'
+    get_queryset = Profile.objects.is_activated
 
 
-def user_detail(request, pk):
+class UserDetailView(DetailView):
     template_name = 'users/user_detail.html'
-    user_info = get_object_or_404(
-        Profile.objects.is_activated(),
-        pk=pk,
-    )
-    context = {
-        'user_info': user_info,
-    }
-    return render(request, template_name, context)
+    model = Profile
+    context_object_name = 'user'
 
 
-@login_required
-def profile(request):
+class ProfileView(LoginRequiredMixin, FormView):
     template_name = 'users/profile.html'
-    form = UpdateProfileForm(request.POST or None, instance=request.user)
-    user_info = get_object_or_404(
-        Profile,
-        id=request.user.id,
-    )
-    context = {'form': form, 'user_info': user_info}
-    if request.method == 'POST' and form.is_valid():
-        Profile.objects.filter(id=request.user.id).update(
-            **form.cleaned_data,
+    form_class = UpdateProfileForm
+    model = Profile
+    success_url = reverse_lazy('users:profile')
+
+    def get(self, request):
+        form = self.form_class(
+            initial=self.initial,
+            instance=request.user,
         )
-        return redirect('users:profile')
-    return render(request, template_name, context)
+        context = {'form': form}
+        return render(
+            request,
+            self.template_name,
+            context,
+        )
+
+    def post(self, request):
+        form = self.form_class(
+            request.POST or None,
+            instance=request.user,
+        )
+        if form.is_valid():
+            self.model.objects.filter(id=request.user.id).update(
+                **form.cleaned_data,
+            )
+            return redirect('users:profile')
+        context = {'form': form}
+        return render(request, self.template_name, context)

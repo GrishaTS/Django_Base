@@ -1,16 +1,16 @@
 from django.urls import path, re_path
 
-from . import views
+from users import views
 
 app_name = 'users'
 
 urlpatterns = [
-    path('signup/', views.signup, name='signup'),
-    path('user_list/', views.user_list, name='user_list'),
+    path('signup/', views.SignUpView.as_view(), name='signup'),
+    path('user_list/', views.UserListView.as_view(), name='user_list'),
     re_path(
         r'(?P<pk>[1-9]\d*)/$',
-        views.user_detail,
+        views.UserDetailView.as_view(),
         name='user_detail',
     ),
-    path('profile', views.profile, name='profile'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
 ]

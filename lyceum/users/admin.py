@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import CreateProfileForm, UpdateProfileForm
-from .models import Profile
+from users.forms import CreateProfileForm, UpdateProfileForm
+from users.models import Profile
 
 
 @admin.register(Profile)
@@ -14,7 +14,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('is_staff', 'is_superuser', 'is_active')
     ordering = ('email',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password',)}),
         ('Personal info', {'fields': ('birthday',)}),
         ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active')}),
     )
@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
                 'password1',
                 'password2',
                 'is_staff',
-                'is_active'
+                'is_active',
             ),
         }),
     )

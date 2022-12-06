@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
-from .models import Profile
+from users.models import Profile
 
 
 class CreateProfileForm(UserCreationForm):
@@ -28,7 +28,7 @@ class UpdateProfileForm(UserChangeForm):
 
     class Meta:
         model = Profile
-        fields = ('email', 'birthday', 'first_name', 'last_name',)
+        fields = ('email', 'birthday', 'first_name', 'last_name')
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
         }

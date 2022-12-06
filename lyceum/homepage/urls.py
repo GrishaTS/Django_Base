@@ -1,13 +1,13 @@
 from django.urls import path
 
-from . import views
+from homepage import views
 
 app_name = 'homepage'
 
 urlpatterns = [
     path(
         '',
-        views.home,
+        views.HomeView.as_view(),
         name='home',
     )
 ]
