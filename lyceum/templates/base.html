@@ -32,8 +32,10 @@
   </head>
   <body>
     {% include "includes/header.html" %}
-    {% include "includes/users_birthday.html" %}
-      <main style="margin-left: 50px">{% block content %}Контент не подвезли{% endblock %}</main>
+    <div class="container">
+      {% include "includes/users_birthday.html" %}
+      <main style="margin-left: 10px">{% block content %}Контент не подвезли{% endblock %}</main>
+    </div>
     {% include "includes/footer.html" %}
   </body>
 </html>

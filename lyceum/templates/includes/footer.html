@@ -1,33 +1,36 @@
 {% load static %}
 
 <footer class="footer mt-auto py-3">
-  <div class="d-flex justify-content-end"> 
-    <p class="col-md-3 mb-0">© 2021 Company, Inc</p>
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item">
-        <a 
+  
+  <div class="container">
+    <div class="d-flex justify-content-end"> 
+      <p class="col-md-3 mb-0">© 2022 Company, Inc</p>
+      <ul class="nav col-md-6 justify-content-end">
+        <li class="nav-item">
+          <a 
+            class="nav-link px-2 text-muted"
+            href="{% url 'homepage:home' %}"
+          >Главная</a>
+        </li>
+        <li class="nav-item">
+          <a
           class="nav-link px-2 text-muted"
-          href="{% url 'homepage:home' %}"
-        >Главная</a>
-      </li>
-      <li class="nav-item">
-        <a
-         class="nav-link px-2 text-muted"
-         href="{% url 'catalog:item_list' %}"
-        >Список товаров</a>
-      </li>
-      <li class="nav-item">
-        <a
-         class="nav-link px-2 text-muted"
-         href="{% url 'about:description' %}"
-        >О проекте</a>
-      </li>
-      <li class="nav-item">
-        <a
-         class="nav-link px-2 text-muted"
-         href="{% url 'feedback:feedback' %}"
-        >Обратная связь</a>
-      </li>
-    </ul>
+          href="{% url 'catalog:item_list' %}"
+          >Список товаров</a>
+        </li>
+        <li class="nav-item">
+          <a
+          class="nav-link px-2 text-muted"
+          href="{% url 'about:description' %}"
+          >О проекте</a>
+        </li>
+        <li class="nav-item">
+          <a
+          class="nav-link px-2 text-muted"
+          href="{% url 'feedback:feedback' %}"
+          >Обратная связь</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </footer>
