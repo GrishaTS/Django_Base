@@ -19,7 +19,7 @@ class ItemManager(models.Manager):
                 )
             )
             .select_related('photo')
-            .only('id', 'name', 'text', 'category__name', 'tags', 'photo')
+            .only('id', 'name', 'text', 'category__name', 'tags', 'photo',)
         )
 
 
@@ -79,7 +79,7 @@ class GalleryImage(BaseModelImage):
     item = models.ForeignKey(
         Item,
         related_name='item',
-        verbose_name='Товар',
+        verbose_name='товар',
         help_text='Выберите товар',
         on_delete=models.CASCADE,
     )
@@ -95,6 +95,7 @@ class TagManager(models.Manager):
         return (
             self.get_queryset()
             .filter(is_published=True)
+            .only('name')
         )
 
 

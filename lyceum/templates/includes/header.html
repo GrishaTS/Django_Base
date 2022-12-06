@@ -37,11 +37,10 @@
               >Обратная связь</a>
             </li>
           </ul>
-  
           <ul class="navbar-nav col-md-6 text-end">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="{% static 'img/user.png' %}" alt="user" style="width: 8%"></i></a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #857f7a;">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="{% static 'img/user.png' %}" alt="user" style="width: 8%"></a>
+               <ul class="dropdown-menu" style="background-color: #857f7a;">
                 {% if user.is_authenticated %}
                   <li><a class="dropdown-item" style="color: white;" href="{% url 'users:profile' %}">Мой профиль</a></li>
                   <li><a class="dropdown-item" style="color: white;" href="{% url 'users:user_list' %}">Профили</a></li>
