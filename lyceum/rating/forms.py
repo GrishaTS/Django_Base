@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField
+from django.forms import ModelForm, Select
 
 from rating.models import Rating
 
@@ -11,4 +11,5 @@ class RatingForm(ModelForm):
 
     class Meta:
         model = Rating
-        fields = ('rate',)
+        fields = '__all__'
+        exclude = ('user', 'item',)

@@ -8,22 +8,25 @@ from catalog.models import Item
 
 class Rating(models.Model):
     class Rate(models.IntegerChoices):
-        VERY_BAD = 1
-        BAD = 2
-        OK = 3
-        GOOD = 4
-        VERY_GOOD = 5
+        Ненависть = 1
+        Неприязнь = 2
+        Нейтрально = 3
+        Обожание = 4
+        Любовь = 5
 
     rate = models.IntegerField(
+        'оценка',
         validators=[MinValueValidator(1), MaxValueValidator(5)],
         choices=Rate.choices
     )
     item = models.ForeignKey(
         Item,
+        verbose_name='товар',
         on_delete=models.CASCADE,
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
+        verbose_name='пользователь',
         on_delete=models.CASCADE,
     )
 
