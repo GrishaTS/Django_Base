@@ -1,6 +1,5 @@
-from django.shortcuts import reverse
-from django.test import Client, TestCase
-
+from django.test import TestCase
+from django.urls import reverse
 from feedback.forms import FeedbackForm
 from feedback.models import Feedback
 
@@ -26,7 +25,7 @@ class FormTest(TestCase):
             'email': 'example@gmail.com',
             'text': 'ТЕКСТ ТЕСТА',
         }
-        response = Client().post(
+        response = self.client.post(
             reverse('feedback:feedback'),
             data=form_data,
             follow=True,
@@ -40,6 +39,6 @@ class FormTest(TestCase):
         )
 
     def test_item_list_page_show_correct_context(self):
-        response = Client().get(reverse('feedback:feedback'))
+        response = self.client.get(reverse('feedback:feedback'))
         self.assertIn('form', response.context)
         self.assertEqual(len(list(response.context['form'])), 3)

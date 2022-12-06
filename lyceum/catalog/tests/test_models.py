@@ -57,7 +57,12 @@ class TestsForModels(TestCase):
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(self.Tag)
-            self.assertEqual(
-                Item.objects.count(),
-                item_count + i,
-            )
+        self.assertEqual(
+            Item.objects.count(),
+            item_count + i,
+        )
+
+    def tearDown(self):
+        Item.objects.all().delete()
+        Category.objects.all().delete()
+        super().tearDown()

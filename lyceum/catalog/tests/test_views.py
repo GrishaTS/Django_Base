@@ -1,7 +1,6 @@
-from django.test import Client, TestCase
-from django.urls import reverse
-
 from catalog.models import Category, Item
+from django.test import TestCase
+from django.urls import reverse
 
 
 class TaskPagesTests(TestCase):
@@ -21,6 +20,11 @@ class TaskPagesTests(TestCase):
             )
 
     def test_item_list_page_show_correct_context(self):
-        response = Client().get(reverse('catalog:item_list'))
+        response = self.client.get(reverse('catalog:item_list'))
         self.assertIn('items', response.context)
         self.assertEqual(len(response.context['items']), 10)
+
+    def tearDown(self):
+        Item.objects.all().delete()
+        Category.objects.all().delete()
+        super().tearDown()

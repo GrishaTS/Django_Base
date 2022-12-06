@@ -1,4 +1,4 @@
-from django.test import Client, TestCase
+from django.test import TestCase
 
 
 class StaticURLTests(TestCase):
@@ -37,7 +37,7 @@ class StaticURLTests(TestCase):
         for status, endpoint_list in endpoint_status.items():
             for endpoint in endpoint_list:
                 with self.subTest(endpoint=endpoint):
-                    response = Client().get(endpoint)
+                    response = self.client.get(endpoint)
                     self.assertEqual(
                         response.status_code,
                         status,
