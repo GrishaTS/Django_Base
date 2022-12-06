@@ -1,6 +1,7 @@
 from django.views.generic import DetailView, ListView
 
-from .models import Item
+from catalog.models import Item
+from rating.forms import RatingForm
 
 
 class ItemListView(ListView):
@@ -12,5 +13,6 @@ class ItemListView(ListView):
 
 class ItemDetailView(DetailView):
     model = Item
+    form_class = RatingForm
     template_name = 'catalog/item_detail.html'
     context_object_name = 'item'

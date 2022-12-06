@@ -7,8 +7,16 @@ from catalog.models import Item
 
 
 class Rating(models.Model):
+    class Rate(models.IntegerChoices):
+        VERY_BAD = 1
+        BAD = 2
+        OK = 3
+        GOOD = 4
+        VERY_GOOD = 5
+
     rate = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)]
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        choices=Rate.choices
     )
     item = models.ForeignKey(
         Item,
