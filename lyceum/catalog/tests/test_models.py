@@ -42,7 +42,7 @@ class TestsForModels(TestCase):
 
     def test_valid(self):
         item_count = Item.objects.count()
-        for i in enumerate([
+        for i, text in enumerate([
             'превосходно',
             'роскошно слово',
             'не,роскошно!',
@@ -50,14 +50,14 @@ class TestsForModels(TestCase):
             ',превосходно.',
         ], start=1):
             self.item = Item(
-                name='Товар-велосипед' + str(i[0]),
+                name=f'Товар-велосипед {i}',
                 category=self.Category,
-                text=i[1],
+                text=text,
             )
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(self.Tag)
             self.assertEqual(
                 Item.objects.count(),
-                item_count + i[0],
+                item_count + i,
             )

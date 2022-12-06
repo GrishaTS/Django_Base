@@ -12,7 +12,7 @@ class SignUpView(FormView):
     template_name = 'users/signup.html'
     model = Profile
     form_class = CreateProfileForm
-    success_url = '/users/profile'
+    success_url = reverse_lazy('users:profile')
 
     def form_valid(self, form):
         user = form.save()
@@ -39,15 +39,15 @@ class ProfileView(LoginRequiredMixin, FormView):
     model = Profile
     success_url = reverse_lazy('users:profile')
 
+    def get(self, request):
+        form = self.form_class(initial=self.initial, instance=request.user)
+        return render(request, self.template_name, {'form': form})
+
     def post(self, request):
         form = self.form_class(request.POST or None, instance=request.user)
         if form.is_valid():
-            form.save()
-        return render(
-            request,
-            self.template_name,
-            {'form': form},
-        )
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+            self.model.objects.filter(id=request.user.id).update(
+                **form.cleaned_data,
+            )
+            return redirect('users:profile')
+        return render(request, self.template_name, {'form': form})
