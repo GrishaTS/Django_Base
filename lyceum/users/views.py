@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, ListView
 
-from .forms import CreateProfileForm, UpdateProfileForm
-from .models import Profile
+from users.forms import CreateProfileForm, UpdateProfileForm
+from users.models import Profile
 
 
 class SignUpView(FormView):

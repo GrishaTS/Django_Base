@@ -1,8 +1,8 @@
 from django.shortcuts import reverse
 from django.test import Client, TestCase
 
-from .forms import FeedbackForm
-from .models import Feedback
+from feedback.forms import FeedbackForm
+from feedback.models import Feedback
 
 
 class FormTest(TestCase):

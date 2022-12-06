@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import CreateProfileForm, UpdateProfileForm
-from .models import Profile
+from users.forms import CreateProfileForm, UpdateProfileForm
+from users.models import Profile
 
 
 @admin.register(Profile)

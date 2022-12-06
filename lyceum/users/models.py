@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 
-from .managers import ProfileManager
+from users.managers import ProfileManager
 
 
 class Profile(AbstractBaseUser, PermissionsMixin):
