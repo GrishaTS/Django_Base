@@ -48,5 +48,7 @@ Password: admin
 #### В проекте находится тесовая база данных (db.sqlite), для ознакомления с ее структурой и админкой
 ### Для наглядности структуры можете посмотреть ER-диаграмму:
 ![image](https://user-images.githubusercontent.com/69619529/202220165-2c5f11d2-e1c9-401f-ad1a-c5338c4a1ca7.png)
-### Отдельные таблицы:
+### Другие таблицы:
 ![image](https://user-images.githubusercontent.com/69619529/205300568-9c10b5b2-1bf2-46a6-822f-cf257e288af4.png)
+![image](https://user-images.githubusercontent.com/69619529/206010202-df4225b7-57cc-4634-9556-8868e80873cd.png)
+
