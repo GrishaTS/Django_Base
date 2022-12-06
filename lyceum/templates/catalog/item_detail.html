@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-lg-3 col-md-4 col-6">
     <img
-      src="{{item.photo.get_img.url}}"
+      src="{{ item.photo.get_img.url }}"
       style="width: 100%; border:4px solid #000000; border-radius: 10px;"
       alt="{{item.id}}"
     >
@@ -25,6 +25,12 @@
     </ul>
   </div>
 </div>
+{{ item }}
+{{ item.gallery }}
+{{ item__gallery }}
+{% for photo in item.gallery %}
+  {{ photo.get_img.url }}
+{% endfor %}
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

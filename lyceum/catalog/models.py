@@ -79,7 +79,7 @@ class GalleryImage(BaseModelImage):
     item = models.ForeignKey(
         Item,
         related_name='item',
-        verbose_name='Товар',
+        verbose_name='товар',
         help_text='Выберите товар',
         on_delete=models.CASCADE,
     )
