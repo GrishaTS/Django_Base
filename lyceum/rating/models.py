@@ -18,6 +18,7 @@ class Rating(models.Model):
     rate = models.IntegerField(
         'оценка',
         choices=Rate.choices,
+        blank=True
     )
     item = models.ForeignKey(
         Item,

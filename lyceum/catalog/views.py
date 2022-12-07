@@ -33,19 +33,25 @@ class ItemDetailView(DetailView, FormView):
             Avg('rate'),
             Count('rate'),
         )
-        context['form'].fields['rate'].initial = rating.filter(
-            user=self.request.user,
-        ).first().rate
+        if self.request.user and self.request.user.is_authenticated:
+            rate = rating.filter(
+                user=self.request.user,
+            ).first()
+            if rate:
+                context['form'].fields['rate'].initial = rate.rate
         return context
 
     def post(self, request, pk):
         form = self.form_class(request.POST or None)
         if form.is_valid():
-            Rating.objects.update_or_create(
-                user=request.user.id,
-                item=pk,
-                defaults={
-                    'rate': form.cleaned_data['rate'],
-                },
-            )
+            if not form.cleaned_data['rate']:
+                Rating.objects.filter(user=request.user.id, item=pk).delete()
+            else:
+                Rating.objects.update_or_create(
+                    user_id=request.user.id,
+                    item_id=pk,
+                    defaults={
+                        'rate': form.cleaned_data['rate'],
+                    },
+                )
         return redirect('catalog:item_detail', pk)
