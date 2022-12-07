@@ -23,7 +23,6 @@ class ItemDetailView(DetailView, FormView):
     def get(self, request, pk):
         form = self.form_class(
             request.POST or None,
-            initial={'rate': 3},
         )
         user = request.user
         item = get_object_or_404(
@@ -60,14 +59,17 @@ class ItemDetailView(DetailView, FormView):
         if form.is_valid():
             user = request.user
             item = Item.objects.get(pk=pk)
-            obj = form.save(commit=False)
-            Rating.objects.update_or_create(
-                user=user,
-                item=item,
-                defaults={
-                    'rate': obj.rate,
-                },
-            )
+            rate = form.save(commit=False).rate
+            if rate is None:
+                Rating.objects.filter(user=user, item=item).delete()
+            else:
+                Rating.objects.update_or_create(
+                    user=user,
+                    item=item,
+                    defaults={
+                        'rate': rate,
+                    },
+                )
             return redirect('catalog:item_detail', pk)
         context = {'form': form}
         return render(request, self.template_name, context)
