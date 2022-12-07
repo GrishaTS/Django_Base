@@ -26,7 +26,7 @@ class UsersProcessorTests(TestCase):
             'users:signup',
         ]
         for value in urls:
-            with self.subTest("Failed to open url", value=value):
+            with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
                 self.assertIn('users', response.context)
@@ -46,7 +46,7 @@ class UsersProcessorTests(TestCase):
             'users:signup',
         ]
         for value in urls:
-            with self.subTest("Failed to open url", value=value):
+            with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
                 self.assertIn('users', response.context)
@@ -68,7 +68,7 @@ class UsersProcessorTests(TestCase):
             'users:signup',
         ]
         for value in urls:
-            with self.subTest("Failed to open url", value=value):
+            with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
                 self.assertIn('users', response.context)
@@ -91,7 +91,7 @@ class UsersProcessorTests(TestCase):
             'users:signup',
         ]
         for value in urls:
-            with self.subTest("Failed to open url", value=value):
+            with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
                 self.assertIn('users', response.context)
