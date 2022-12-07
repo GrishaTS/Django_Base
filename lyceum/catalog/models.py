@@ -1,8 +1,8 @@
 from ckeditor.fields import RichTextField
-from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 from django.db import models
 
 from catalog.validators import validate_must_be_param
+from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 
 
 class ItemManager(models.Manager):
