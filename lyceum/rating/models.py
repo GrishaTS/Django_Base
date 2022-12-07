@@ -17,10 +17,7 @@ class Rating(models.Model):
 
     rate = models.IntegerField(
         'оценка',
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
         choices=Rate.choices,
-        blank=True,
-        null=True
     )
     item = models.ForeignKey(
         Item,
@@ -36,7 +33,7 @@ class Rating(models.Model):
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=['user', 'item'],
+                fields=('user', 'item'),
                 name='rating_unique',
             )
         ]
