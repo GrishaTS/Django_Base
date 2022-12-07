@@ -13,11 +13,14 @@ class Rating(models.Model):
         Нейтрально = 3
         Обожание = 4
         Любовь = 5
+        __empty__ = 'Без оценки'
 
     rate = models.IntegerField(
         'оценка',
         validators=[MinValueValidator(1), MaxValueValidator(5)],
-        choices=Rate.choices
+        choices=Rate.choices,
+        blank=True,
+        null=True
     )
     item = models.ForeignKey(
         Item,
