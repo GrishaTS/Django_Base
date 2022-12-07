@@ -26,18 +26,24 @@ class ItemDetailView(DetailView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['stat'] = Rating.objects.filter(
+        rating = Rating.objects.filter(
             item=context['item'],
-        ).aggregate(Avg('rate'), Count('rate'))
+        )
+        context['stat'] = rating.aggregate(
+            Avg('rate'),
+            Count('rate'),
+        )
+        context['form'].fields['rate'].initial = rating.filter(
+            user=self.request.user,
+        ).first().rate
         return context
 
     def post(self, request, pk):
         form = self.form_class(request.POST or None)
-        item = Item.objects.get(pk=pk)
         if form.is_valid():
             Rating.objects.update_or_create(
-                user=request.user,
-                item=item,
+                user=request.user.id,
+                item=pk,
                 defaults={
                     'rate': form.cleaned_data['rate'],
                 },
