@@ -1,7 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 
-from catalog.validators import validate_must_be_param
+from catalog.validators import ValidateMustBeParam
 from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 
 
@@ -38,9 +38,8 @@ class Item(BaseModel):
     )
     text = RichTextField(
         'описание',
-        validators=[validate_must_be_param('превосходно', 'роскошно')],
+        validators=[ValidateMustBeParam('роскошно', 'превосходно')],
         help_text='В тексте должны быть слова "превосходно" или "роскошно"',
-
     )
     category = models.ForeignKey(
         'Category',
