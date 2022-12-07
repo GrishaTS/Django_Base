@@ -1,7 +1,6 @@
 from django.db.models import Avg, Count
-from django.views.generic import DetailView, FormView, ListView
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from django.views.generic import DetailView, FormView, ListView
 
 from catalog.models import Item
 from rating.forms import RatingForm
