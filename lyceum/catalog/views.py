@@ -21,8 +21,13 @@ class ItemDetailView(DetailView, FormView):
     template_name = 'catalog/item_detail.html'
     context_object_name = 'item'
 
-    def get_success_url(self, pk):
-        return reverse_lazy('catalog:item_detail', pk=pk)
+    def get_success_url(self):
+        return reverse_lazy(
+            'catalog:item_detail',
+            args=(
+                self.kwargs['pk'],
+            )
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -54,4 +59,4 @@ class ItemDetailView(DetailView, FormView):
                         'rate': form.cleaned_data['rate'],
                     },
                 )
-        return redirect('catalog:item_detail', pk)
+        return super().post(self, request)
