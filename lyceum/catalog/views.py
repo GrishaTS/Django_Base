@@ -27,7 +27,7 @@ class ItemDetailView(DetailView, FormView):
         user = request.user
         item = get_object_or_404(
             Item.objects.published(),
-            pk=pk
+            pk=pk,
         )
         if user.is_authenticated:
             rate = Rating.objects.filter(
