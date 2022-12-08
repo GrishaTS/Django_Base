@@ -5,11 +5,6 @@ from django.contrib.auth.base_user import BaseUserManager
 
 class ProfileManager(BaseUserManager):
 
-    def get_queryset(self):
-        return (
-            super().get_queryset()
-        )
-
     def is_activated(self):
         return (
             self.get_queryset().

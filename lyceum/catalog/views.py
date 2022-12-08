@@ -32,7 +32,7 @@ class ItemDetailView(DetailView, FormView):
         context = super().get_context_data(**kwargs)
         rating = Rating.objects.filter(
             item=context['item'],
-        )
+        ).select_related('user', 'item').all()
         context['stat'] = rating.aggregate(
             Avg('rate'),
             Count('rate'),
