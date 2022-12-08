@@ -15,16 +15,12 @@ class UsersProcessorTests(TestCase):
         super().setUpClass()
         cls.fake_today = date(2020, 1, 1)
         mock_today.return_value = cls.fake_today
-        cls.Profile = Profile.objects.create(
+        cls.profile = Profile.objects.create(
             email='user@user.ru',
             password='smartuser',
             birthday=date_util.today(),
         )
-
-    @mock.patch('core.date_util.today')
-    def test_show_users_context(self, mock_today):
-        mock_today.return_value = self.fake_today
-        urls = [
+        cls.urls = [
             'about:description',
             'catalog:item_list',
             'feedback:feedback',
@@ -32,7 +28,11 @@ class UsersProcessorTests(TestCase):
             'users:user_list',
             'users:signup',
         ]
-        for value in urls:
+
+    @mock.patch('core.date_util.today')
+    def test_show_users_context(self, mock_today):
+        mock_today.return_value = self.fake_today
+        for value in self.urls:
             with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
@@ -43,16 +43,8 @@ class UsersProcessorTests(TestCase):
                 self.assertEqual(user['email'], 'user@user.ru')
 
     def test_show_empty_context(self):
-        self.Profile.delete()
-        urls = [
-            'about:description',
-            'catalog:item_list',
-            'feedback:feedback',
-            'homepage:home',
-            'users:user_list',
-            'users:signup',
-        ]
-        for value in urls:
+        self.profile.delete()
+        for value in self.urls:
             with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
@@ -67,16 +59,7 @@ class UsersProcessorTests(TestCase):
             password='smartuser2',
             birthday=date_util.today(),
         )
-
-        urls = [
-            'about:description',
-            'catalog:item_list',
-            'feedback:feedback',
-            'homepage:home',
-            'users:user_list',
-            'users:signup',
-        ]
-        for value in urls:
+        for value in self.urls:
             with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)
@@ -92,16 +75,7 @@ class UsersProcessorTests(TestCase):
             password='smartuser2',
             birthday=tomorrow,
         )
-
-        urls = [
-            'about:description',
-            'catalog:item_list',
-            'feedback:feedback',
-            'homepage:home',
-            'users:user_list',
-            'users:signup',
-        ]
-        for value in urls:
+        for value in self.urls:
             with self.subTest('Failed to open url', value=value):
                 response = self.client.get(reverse(value))
                 self.assertTrue(response.context)

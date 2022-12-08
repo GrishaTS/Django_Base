@@ -7,8 +7,8 @@ class ProfileManager(BaseUserManager):
 
     def is_activated(self):
         return (
-            self.get_queryset().
-            filter(is_active=True)
+            self.get_queryset()
+            .filter(is_active=True)
             .only('id', 'email', 'is_superuser', 'is_staff',)
         )
 
@@ -38,8 +38,8 @@ class ProfileManager(BaseUserManager):
         return (
             self.get_queryset()
             .filter(
-                    birthday=date_util.today(),
-                    is_active=True,
-                    )
+                birthday=date_util.today(),
+                is_active=True,
+            )
             .values('email', 'first_name')
         )
