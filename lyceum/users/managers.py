@@ -1,6 +1,6 @@
-from datetime import datetime
-
 from django.contrib.auth.base_user import BaseUserManager
+
+from core import date_util
 
 
 class ProfileManager(BaseUserManager):
@@ -33,9 +33,12 @@ class ProfileManager(BaseUserManager):
             raise ValueError('Superusers must have is_superuser=True')
         return self.create_user(email, password, **extra_fields)
 
-    def published(self):
+    def filter_birthday(self):
         return (
             self.get_queryset()
-            .filter(birthday=datetime.today())
+            .filter(
+                    birthday=date_util.today(),
+                    is_active=True,
+                    )
             .values('email', 'first_name')
         )
