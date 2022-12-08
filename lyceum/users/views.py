@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, ListView
 
@@ -39,17 +39,12 @@ class ProfileView(LoginRequiredMixin, FormView):
     model = Profile
     success_url = reverse_lazy('users:profile')
 
-    def get(self, request):
+    def get_context_data(self, **kwargs):
         form = self.form_class(
             initial=self.initial,
-            instance=request.user,
+            instance=self.request.user,
         )
-        context = {'form': form}
-        return render(
-            request,
-            self.template_name,
-            context,
-        )
+        return {'form': form}
 
     def post(self, request):
         form = self.form_class(
@@ -60,6 +55,5 @@ class ProfileView(LoginRequiredMixin, FormView):
             self.model.objects.filter(id=request.user.id).update(
                 **form.cleaned_data,
             )
-            return redirect('users:profile')
-        context = {'form': form}
-        return render(request, self.template_name, context)
+            return super().post(self, request)
+        return redirect('users:profile')
