@@ -1,3 +1,5 @@
+lyceum/media/
+*.sqlite3
 pyc
 .vscode/
 .idea/
