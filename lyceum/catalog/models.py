@@ -6,12 +6,10 @@ from core.models import BaseModel, BaseModelImage, BaseModelWithSlug
 
 
 class ItemManager(models.Manager):
-    def published(self):
+    def get_queryset(self):
         return (
-            self.get_queryset()
-            .filter(is_published=True)
+            super().get_queryset()
             .select_related('category')
-            .order_by('name')
             .prefetch_related(
                 models.Prefetch(
                     'tags',
@@ -19,6 +17,13 @@ class ItemManager(models.Manager):
                 )
             )
             .select_related('photo')
+        )
+
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True)
+            .order_by('name')
             .only('id', 'name', 'text', 'category__name', 'tags', 'photo',)
         )
 
@@ -54,6 +59,7 @@ class Item(BaseModel):
     )
 
     class Meta:
+        default_manager_name = 'objects'
         default_related_name = 'items'
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
