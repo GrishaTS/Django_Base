@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     {% for user in users %}
-    <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" style="margin: 10px; background-color: #ddd7d2; color: #000;">
-      <div class="toast-header" style="background-color: #ddd7d2; color: #000;">
+    <div class="toast fade show" id="toast_fade_show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
         <strong class="me-auto">
           Сегодня день рождение у {{ user.email }}
           {% if user.first_name %}

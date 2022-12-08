@@ -39,10 +39,10 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style="background-color: #FBF2EB;"
+              id="close_modal"
             ></button>
           </div>
-          <div class="modal-body" style="background-color: #FBF2EB;">
+          <div class="modal-body">
             <form method="post">
               {% csrf_token %}
               {% for field in form %}
