@@ -55,5 +55,4 @@ class ProfileView(LoginRequiredMixin, FormView):
             self.model.objects.filter(id=request.user.id).update(
                 **form.cleaned_data,
             )
-            return super().post(self, request)
-        return redirect('users:profile')
+        return super().post(self, request)
